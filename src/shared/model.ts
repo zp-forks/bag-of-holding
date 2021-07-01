@@ -1,7 +1,19 @@
 import mongoose from 'mongoose';
-import { Campaign } from './__generated__/schema-types';
 
-type PersistedCampaign = Omit<Campaign, '__typename'> & mongoose.Document;
+type Item = {
+  name: string;
+  description?: string;
+};
+
+type Campaign = {
+  name: string;
+  gold: number;
+  silver: number;
+  bronze: number;
+  items: Item[];
+};
+
+type PersistedCampaign = Campaign & mongoose.Document;
 
 const ItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,10 +21,10 @@ const ItemSchema = new mongoose.Schema({
 });
 
 const CampaignSchema = new mongoose.Schema({
-  name: { type: String },
-  gold: { type: Number },
-  silver: { type: Number },
-  bronze: { type: Number },
+  name: { type: String, required: true },
+  gold: { type: Number, required: true },
+  silver: { type: Number, required: true },
+  bronze: { type: Number, required: true },
   items: [ItemSchema],
 });
 

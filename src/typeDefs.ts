@@ -16,11 +16,11 @@ export const typeDefs = gql`
     gold: Int!
     silver: Int!
     bronze: Int!
-    items: [Item]!
+    items: [Item!]!
   }
 
   type Query {
-    getGames: [CreatedCampaign]!
+    listCampaigns: [Campaign]!
   }
 
   type Mutation {

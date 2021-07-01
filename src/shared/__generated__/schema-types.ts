@@ -25,7 +25,7 @@ export type Campaign = {
   gold: Scalars['Int'];
   silver: Scalars['Int'];
   bronze: Scalars['Int'];
-  items: Array<Maybe<Item>>;
+  items: Array<Item>;
 };
 
 export type CreatedCampaign = {
@@ -51,7 +51,7 @@ export type MutationCreateCampaignArgs = {
 
 export type Query = {
   __typename: 'Query';
-  getGames: Array<Maybe<CreatedCampaign>>;
+  listCampaigns: Array<Maybe<Campaign>>;
 };
 
 
@@ -151,7 +151,7 @@ export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTyp
   gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   bronze?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  items?: Resolver<Array<Maybe<ResolversTypes['Item']>>, ParentType, ContextType>;
+  items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -171,7 +171,7 @@ export type MutationResolvers<ContextType = any, ParentType = ResolversParentTyp
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
-  getGames?: Resolver<Array<Maybe<ResolversTypes['CreatedCampaign']>>, ParentType, ContextType>;
+  listCampaigns?: Resolver<Array<Maybe<ResolversTypes['Campaign']>>, ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
