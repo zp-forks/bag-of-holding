@@ -46,12 +46,12 @@ export const typeDefs = gql`
 
   type Query {
     listCampaigns: [Campaign]!
-    fetchCampaign(id: ID!): FetchCampaignResult
+    fetchCampaign(id: ID!): FetchCampaignResult!
   }
 
   type Mutation {
     createCampaign(name: String!): CreatedCampaign!
-    addItem(id: ID!, input: AddItemInput!): AddItemResult
-    modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult
+    addItem(id: ID!, input: AddItemInput!): AddItemResult!
+    modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
   }
 `;

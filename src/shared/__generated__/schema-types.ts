@@ -70,8 +70,8 @@ export enum MoneyModification {
 export type Mutation = {
   __typename: 'Mutation';
   createCampaign: CreatedCampaign;
-  addItem?: Maybe<AddItemResult>;
-  modifyMoney?: Maybe<ModifyMoneyResult>;
+  addItem: AddItemResult;
+  modifyMoney: ModifyMoneyResult;
 };
 
 
@@ -94,7 +94,7 @@ export type MutationModifyMoneyArgs = {
 export type Query = {
   __typename: 'Query';
   listCampaigns: Array<Maybe<Campaign>>;
-  fetchCampaign?: Maybe<FetchCampaignResult>;
+  fetchCampaign: FetchCampaignResult;
 };
 
 
@@ -246,13 +246,13 @@ export type ModifyMoneyResultResolvers<ContextType = any, ParentType = Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType = ResolversParentTypes['Mutation']> = ResolversObject<{
   createCampaign?: Resolver<ResolversTypes['CreatedCampaign'], ParentType, ContextType, RequireFields<MutationCreateCampaignArgs, 'name'>>;
-  addItem?: Resolver<Maybe<ResolversTypes['AddItemResult']>, ParentType, ContextType, RequireFields<MutationAddItemArgs, 'id' | 'input'>>;
-  modifyMoney?: Resolver<Maybe<ResolversTypes['ModifyMoneyResult']>, ParentType, ContextType, RequireFields<MutationModifyMoneyArgs, 'id' | 'input'>>;
+  addItem?: Resolver<ResolversTypes['AddItemResult'], ParentType, ContextType, RequireFields<MutationAddItemArgs, 'id' | 'input'>>;
+  modifyMoney?: Resolver<ResolversTypes['ModifyMoneyResult'], ParentType, ContextType, RequireFields<MutationModifyMoneyArgs, 'id' | 'input'>>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
   listCampaigns?: Resolver<Array<Maybe<ResolversTypes['Campaign']>>, ParentType, ContextType>;
-  fetchCampaign?: Resolver<Maybe<ResolversTypes['FetchCampaignResult']>, ParentType, ContextType, RequireFields<QueryFetchCampaignArgs, 'id'>>;
+  fetchCampaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryFetchCampaignArgs, 'id'>>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
