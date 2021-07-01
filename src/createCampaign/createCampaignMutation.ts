@@ -1,4 +1,9 @@
-import { CampaignModel, CreatedCampaign, MutationResolvers } from '../shared';
+import {
+  CampaignModel,
+  CreatedCampaign,
+  logger,
+  MutationResolvers,
+} from '../shared';
 
 export const createCampaignMutation: MutationResolvers['createCampaign'] =
   async (_, { name }): Promise<CreatedCampaign> => {
@@ -11,6 +16,8 @@ export const createCampaignMutation: MutationResolvers['createCampaign'] =
     });
 
     const savedCampaign = await campaignToSave.save();
+
+    logger.info(`Created new campaign - ${name}`);
 
     return {
       __typename: 'CreatedCampaign',
