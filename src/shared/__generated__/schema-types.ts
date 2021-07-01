@@ -28,10 +28,17 @@ export type Campaign = {
   items: Array<Item>;
 };
 
+export type CampaignNotFound = {
+  __typename: 'CampaignNotFound';
+  message: Scalars['String'];
+};
+
 export type CreatedCampaign = {
   __typename: 'CreatedCampaign';
   id: Scalars['ID'];
 };
+
+export type FetchCampaignResult = Campaign | CampaignNotFound;
 
 export type Item = {
   __typename: 'Item';
@@ -52,6 +59,12 @@ export type MutationCreateCampaignArgs = {
 export type Query = {
   __typename: 'Query';
   listCampaigns: Array<Maybe<Campaign>>;
+  fetchCampaign?: Maybe<FetchCampaignResult>;
+};
+
+
+export type QueryFetchCampaignArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -125,7 +138,9 @@ export type ResolversTypes = ResolversObject<{
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  CampaignNotFound: ResolverTypeWrapper<CampaignNotFound>;
   CreatedCampaign: ResolverTypeWrapper<CreatedCampaign>;
+  FetchCampaignResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   Item: ResolverTypeWrapper<Item>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -138,7 +153,9 @@ export type ResolversParentTypes = ResolversObject<{
   ID: Scalars['ID'];
   String: Scalars['String'];
   Int: Scalars['Int'];
+  CampaignNotFound: CampaignNotFound;
   CreatedCampaign: CreatedCampaign;
+  FetchCampaignResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   Item: Item;
   Mutation: {};
   Query: {};
@@ -155,9 +172,18 @@ export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTyp
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type CampaignNotFoundResolvers<ContextType = any, ParentType = ResolversParentTypes['CampaignNotFound']> = ResolversObject<{
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type CreatedCampaignResolvers<ContextType = any, ParentType = ResolversParentTypes['CreatedCampaign']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type FetchCampaignResultResolvers<ContextType = any, ParentType = ResolversParentTypes['FetchCampaignResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
 
 export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['Item']> = ResolversObject<{
@@ -172,11 +198,14 @@ export type MutationResolvers<ContextType = any, ParentType = ResolversParentTyp
 
 export type QueryResolvers<ContextType = any, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
   listCampaigns?: Resolver<Array<Maybe<ResolversTypes['Campaign']>>, ParentType, ContextType>;
+  fetchCampaign?: Resolver<Maybe<ResolversTypes['FetchCampaignResult']>, ParentType, ContextType, RequireFields<QueryFetchCampaignArgs, 'id'>>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   Campaign?: CampaignResolvers<ContextType>;
+  CampaignNotFound?: CampaignNotFoundResolvers<ContextType>;
   CreatedCampaign?: CreatedCampaignResolvers<ContextType>;
+  FetchCampaignResult?: FetchCampaignResultResolvers<ContextType>;
   Item?: ItemResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

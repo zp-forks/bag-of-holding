@@ -19,8 +19,15 @@ export const typeDefs = gql`
     items: [Item!]!
   }
 
+  type CampaignNotFound {
+    message: String!
+  }
+
+  union FetchCampaignResult = Campaign | CampaignNotFound
+
   type Query {
     listCampaigns: [Campaign]!
+    fetchCampaign(id: ID!): FetchCampaignResult
   }
 
   type Mutation {

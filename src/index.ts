@@ -9,7 +9,7 @@ config();
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers: resolvers as any,
+  resolvers: resolvers,
   resolverValidationOptions: { requireResolversForResolveType: false },
 });
 
