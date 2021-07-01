@@ -5,14 +5,15 @@ import {
   CampaignNotFound,
   Item,
   logger,
+  MoneyModification,
   MutationResolvers,
 } from '../shared';
 
-export const addItemMutation: MutationResolvers['addItem'] = async (
+export const modifyMoneyMutation: MutationResolvers['modifyMoney'] = async (
   _,
   { id, input }
 ): Promise<Campaign | CampaignNotFound> => {
-  logger.info(`Adding item to campaign with ID ${id}`);
+  logger.info(`Modifying gold on campaign with ID ${id}`);
 
   if (!Types.ObjectId.isValid(id)) {
     return {
@@ -30,10 +31,15 @@ export const addItemMutation: MutationResolvers['addItem'] = async (
     };
   }
 
-  savedCampaign.items.push({
-    name: input.name,
-    description: input.description ?? undefined,
-  });
+  if (input.modification === MoneyModification.ADD) {
+    savedCampaign.gold += input.gold;
+    savedCampaign.silver += input.silver;
+    savedCampaign.bronze += input.bronze;
+  } else {
+    savedCampaign.gold -= input.gold;
+    savedCampaign.silver -= input.silver;
+    savedCampaign.bronze -= input.bronze;
+  }
 
   savedCampaign.save();
 
