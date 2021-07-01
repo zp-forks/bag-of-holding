@@ -1,5 +1,7 @@
+import { createCampaignMutation } from './createCampaign';
+
 export const resolvers = {
-  Query: {
-    dummy: () => [],
+  Mutation: {
+    createCampaign: createCampaignMutation,
   },
 };

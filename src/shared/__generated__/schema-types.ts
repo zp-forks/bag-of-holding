@@ -3,6 +3,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -17,14 +18,40 @@ export type Scalars = {
 
 
 
-export type Dummy = {
-  __typename: 'Dummy';
-  value?: Maybe<Scalars['String']>;
+export type Campaign = {
+  __typename: 'Campaign';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  gold: Scalars['Int'];
+  silver: Scalars['Int'];
+  bronze: Scalars['Int'];
+  items: Array<Maybe<Item>>;
+};
+
+export type CreatedCampaign = {
+  __typename: 'CreatedCampaign';
+  id: Scalars['ID'];
+};
+
+export type Item = {
+  __typename: 'Item';
+  name: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  __typename: 'Mutation';
+  createCampaign: CreatedCampaign;
+};
+
+
+export type MutationCreateCampaignArgs = {
+  name: Scalars['String'];
 };
 
 export type Query = {
   __typename: 'Query';
-  dummy?: Maybe<Array<Maybe<Dummy>>>;
+  getGames: Array<Maybe<CreatedCampaign>>;
 };
 
 
@@ -94,31 +121,64 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  Dummy: ResolverTypeWrapper<Dummy>;
+  Campaign: ResolverTypeWrapper<Campaign>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  CreatedCampaign: ResolverTypeWrapper<CreatedCampaign>;
+  Item: ResolverTypeWrapper<Item>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  Dummy: Dummy;
+  Campaign: Campaign;
+  ID: Scalars['ID'];
   String: Scalars['String'];
+  Int: Scalars['Int'];
+  CreatedCampaign: CreatedCampaign;
+  Item: Item;
+  Mutation: {};
   Query: {};
   Boolean: Scalars['Boolean'];
 }>;
 
-export type DummyResolvers<ContextType = any, ParentType = ResolversParentTypes['Dummy']> = ResolversObject<{
-  value?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTypes['Campaign']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  bronze?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  items?: Resolver<Array<Maybe<ResolversTypes['Item']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type CreatedCampaignResolvers<ContextType = any, ParentType = ResolversParentTypes['CreatedCampaign']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['Item']> = ResolversObject<{
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type MutationResolvers<ContextType = any, ParentType = ResolversParentTypes['Mutation']> = ResolversObject<{
+  createCampaign?: Resolver<ResolversTypes['CreatedCampaign'], ParentType, ContextType, RequireFields<MutationCreateCampaignArgs, 'name'>>;
+}>;
+
 export type QueryResolvers<ContextType = any, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
-  dummy?: Resolver<Maybe<Array<Maybe<ResolversTypes['Dummy']>>>, ParentType, ContextType>;
+  getGames?: Resolver<Array<Maybe<ResolversTypes['CreatedCampaign']>>, ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
-  Dummy?: DummyResolvers<ContextType>;
+  Campaign?: CampaignResolvers<ContextType>;
+  CreatedCampaign?: CreatedCampaignResolvers<ContextType>;
+  Item?: ItemResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 }>;
 
