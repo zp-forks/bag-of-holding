@@ -9,7 +9,9 @@
   "dependencies": {
     "apollo-server": "^2.25.2",
     "dotenv": "^10.0.0",
-    "graphql": "^15.5.1"
+    "graphql": "^15.5.1",
+    "mongoose": "^5.13.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.6",
