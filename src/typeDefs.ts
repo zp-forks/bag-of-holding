@@ -23,7 +23,13 @@ export const typeDefs = gql`
     message: String!
   }
 
+  input AddItemInput {
+    name: String!
+    description: String
+  }
+
   union FetchCampaignResult = Campaign | CampaignNotFound
+  union AddItemResult = Campaign | CampaignNotFound
 
   type Query {
     listCampaigns: [Campaign]!
@@ -32,5 +38,6 @@ export const typeDefs = gql`
 
   type Mutation {
     createCampaign(name: String!): CreatedCampaign!
+    addItem(id: ID!, item: AddItemInput!): AddItemResult
   }
 `;
