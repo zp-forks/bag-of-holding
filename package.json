@@ -1,0 +1,38 @@
+{
+  "name": "bag-of-holding",
+  "version": "1.0.0",
+  "description": "Keep track of your D&D groups items with this application",
+  "main": "index.js",
+  "repository": "https://github.com/battmeech/bag-of-holding.git",
+  "author": "<matthew_beech@live.co.uk>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.25.2",
+    "graphql": "^15.5.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.5",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.9",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "dist/"
+    ]
+  },
+  "scripts": {
+    "prettier": "prettier --write .",
+    "build": "tsc",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watchAll",
+    "start": "node dist/index.js",
+    "dev": "nodemon --config nodemon.json src/index.ts"
+  }
+}
