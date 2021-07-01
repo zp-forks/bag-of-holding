@@ -1,6 +1,9 @@
 import { ApolloServer, makeExecutableSchema } from 'apollo-server';
-import { typeDefs } from './typeDefs';
+import { config } from 'dotenv';
 import { resolvers } from './resolvers';
+import { typeDefs } from './typeDefs';
+
+config();
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -10,6 +13,6 @@ const schema = makeExecutableSchema({
 
 const server = new ApolloServer({ schema });
 
-server.listen().then(({ url }) => {
+server.listen(process.env.PORT).then(({ url }) => {
   console.log(`🚀  Server ready at ${url}`);
 });
