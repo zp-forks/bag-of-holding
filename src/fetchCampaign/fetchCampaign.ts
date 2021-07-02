@@ -1,10 +1,9 @@
-import { Types } from 'mongoose';
 import {
   Campaign,
-  CampaignModel,
   CampaignNotFound,
-  Item,
+  getCampaignById,
   logger,
+  mapDatabaseModelToGql,
   QueryResolvers,
 } from '../shared';
 
@@ -14,14 +13,7 @@ export const fetchCampaignQuery: QueryResolvers['fetchCampaign'] = async (
 ): Promise<Campaign | CampaignNotFound> => {
   logger.info(`Fetching campaign with ID ${id}`);
 
-  if (!Types.ObjectId.isValid(id)) {
-    return {
-      __typename: 'CampaignNotFound',
-      message: `No campaign with ID ${id}`,
-    };
-  }
-
-  const savedCampaign = await CampaignModel.findById(id);
+  const savedCampaign = await getCampaignById(id);
 
   if (!savedCampaign) {
     return {
@@ -30,21 +22,5 @@ export const fetchCampaignQuery: QueryResolvers['fetchCampaign'] = async (
     };
   }
 
-  const { name, gold, silver, bronze, items: savedItems } = savedCampaign;
-  const items: Item[] = savedItems.map((savedItem) => ({
-    __typename: 'Item',
-    id: savedItem._id,
-    name: savedItem.name,
-    description: savedItem.description,
-  }));
-
-  return {
-    __typename: 'Campaign',
-    id: savedCampaign._id,
-    name,
-    items,
-    gold,
-    silver,
-    bronze,
-  };
+  return mapDatabaseModelToGql(savedCampaign);
 };

@@ -3,34 +3,16 @@ import {
   CampaignModel,
   Item,
   logger,
+  mapDatabaseModelToGql,
   QueryResolvers,
 } from '../shared';
 
 export const listCampaignsQuery: QueryResolvers['listCampaigns'] =
   async (): Promise<Campaign[]> => {
+    logger.info('Fetching all campaigns');
     const savedCampaigns = await CampaignModel.find();
 
-    logger.info('Fetching all campaigns');
-
-    const campaigns: Campaign[] = savedCampaigns.map((savedCampaign) => {
-      const { name, gold, silver, bronze, items: savedItems } = savedCampaign;
-      const items: Item[] = savedItems.map((savedItem) => ({
-        __typename: 'Item',
-        id: savedItem._id,
-        name: savedItem.name,
-        description: savedItem.description,
-      }));
-
-      return {
-        __typename: 'Campaign',
-        id: savedCampaign._id,
-        name,
-        items,
-        gold,
-        silver,
-        bronze,
-      };
-    });
+    const campaigns: Campaign[] = savedCampaigns.map(mapDatabaseModelToGql);
 
     return campaigns;
   };
