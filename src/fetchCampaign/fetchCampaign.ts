@@ -33,6 +33,7 @@ export const fetchCampaignQuery: QueryResolvers['fetchCampaign'] = async (
   const { name, gold, silver, bronze, items: savedItems } = savedCampaign;
   const items: Item[] = savedItems.map((savedItem) => ({
     __typename: 'Item',
+    id: savedItem._id,
     name: savedItem.name,
     description: savedItem.description,
   }));

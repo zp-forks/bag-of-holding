@@ -6,6 +6,7 @@ export const typeDefs = gql`
   }
 
   type Item {
+    id: ID!
     name: String!
     description: String
   }

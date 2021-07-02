@@ -49,6 +49,7 @@ export type FetchCampaignResult = Campaign | CampaignNotFound;
 
 export type Item = {
   __typename: 'Item';
+  id: Scalars['ID'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
 };
@@ -235,6 +236,7 @@ export type FetchCampaignResultResolvers<ContextType = any, ParentType = Resolve
 }>;
 
 export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['Item']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
