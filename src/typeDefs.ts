@@ -34,6 +34,13 @@ export const typeDefs = gql`
     description: String
   }
 
+  input RemoveItemInput {
+    """
+    ID of the item to be removed
+    """
+    id: ID!
+  }
+
   input ModifyMoneyInput {
     modification: MoneyModification!
     gold: Int!
@@ -43,6 +50,7 @@ export const typeDefs = gql`
 
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
+  union RemoveItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
 
   type Query {
@@ -53,6 +61,7 @@ export const typeDefs = gql`
   type Mutation {
     createCampaign(name: String!): CreatedCampaign!
     addItem(id: ID!, input: AddItemInput!): AddItemResult!
+    removeItem(id: ID!, input: RemoveItemInput!): RemoveItemResult!
     modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
   }
 `;

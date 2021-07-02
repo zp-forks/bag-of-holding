@@ -5,7 +5,7 @@ interface Item extends Types.Subdocument {
   description?: string;
 }
 
-interface Campaign extends Document {
+export interface PersistedCampaign extends Document {
   name: string;
   gold: number;
   silver: number;
@@ -18,7 +18,7 @@ const ItemSchema = new Schema<Item>({
   description: { type: String },
 });
 
-const CampaignSchema = new Schema<Campaign>({
+const CampaignSchema = new Schema<PersistedCampaign>({
   name: { type: String, required: true },
   gold: { type: Number, required: true },
   silver: { type: Number, required: true },
@@ -26,4 +26,7 @@ const CampaignSchema = new Schema<Campaign>({
   items: [ItemSchema],
 });
 
-export const CampaignModel = model<Campaign>('Campaign', CampaignSchema);
+export const CampaignModel = model<PersistedCampaign>(
+  'Campaign',
+  CampaignSchema
+);
