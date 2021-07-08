@@ -20,6 +20,11 @@
     "@graphql-codegen/typescript-resolvers": "1.19.5",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
     "jest": "^27.0.6",
     "nodemon": "^2.0.9",
     "prettier": "^2.3.2",
@@ -35,12 +40,13 @@
     ]
   },
   "scripts": {
-    "prettier": "prettier --write .",
+    "dev": "nodemon --config nodemon.json src/index.ts",
     "build": "tsc",
+    "start": "node dist/index.js",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watchAll",
-    "start": "node dist/index.js",
-    "dev": "nodemon --config nodemon.json src/index.ts",
+    "lint": "eslint ./src --ext ts",
+    "prettier": "prettier --write .",
     "gen:types": "graphql-codegen --config codegen-server.yml"
   }
 }

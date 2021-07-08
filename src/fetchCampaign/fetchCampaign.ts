@@ -9,7 +9,7 @@ import {
 
 export const fetchCampaignQuery: QueryResolvers['fetchCampaign'] = async (
   _,
-  { id }
+  { id },
 ): Promise<Campaign | CampaignNotFound> => {
   logger.info(`Fetching campaign with ID ${id}`);
 

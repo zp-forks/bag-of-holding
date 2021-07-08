@@ -9,7 +9,7 @@ import {
 
 export const addItemMutation: MutationResolvers['addItem'] = async (
   _,
-  { id, input }
+  { id, input },
 ): Promise<Campaign | CampaignNotFound> => {
   logger.info(`Adding item to campaign with ID ${id}`);
 

@@ -28,5 +28,5 @@ const CampaignSchema = new Schema<PersistedCampaign>({
 
 export const CampaignModel = model<PersistedCampaign>(
   'Campaign',
-  CampaignSchema
+  CampaignSchema,
 );

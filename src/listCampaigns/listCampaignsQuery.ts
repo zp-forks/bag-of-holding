@@ -1,7 +1,6 @@
 import {
   Campaign,
   CampaignModel,
-  Item,
   logger,
   mapDatabaseModelToGql,
   QueryResolvers,

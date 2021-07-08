@@ -10,7 +10,7 @@ import {
 
 export const modifyMoneyMutation: MutationResolvers['modifyMoney'] = async (
   _,
-  { id, input }
+  { id, input },
 ): Promise<Campaign | CampaignNotFound> => {
   logger.info(`Modifying gold on campaign with ID ${id}`);
 

@@ -1,10 +1,7 @@
-import { Types } from 'mongoose';
 import {
   Campaign,
-  CampaignModel,
   CampaignNotFound,
   getCampaignById,
-  Item,
   logger,
   mapDatabaseModelToGql,
   MutationResolvers,
@@ -12,7 +9,7 @@ import {
 
 export const removeItemMutation: MutationResolvers['removeItem'] = async (
   _,
-  { id, input }
+  { id, input },
 ): Promise<Campaign | CampaignNotFound> => {
   logger.info(`Removing item from campaign with ID ${id}`);
 
@@ -26,7 +23,8 @@ export const removeItemMutation: MutationResolvers['removeItem'] = async (
   }
 
   const itemToRemove = savedCampaign.items.find(
-    (item) => item._id.toString() === input.id
+    // eslint-disable-next-line no-underscore-dangle
+    (item) => item._id.toString() === input.id,
   );
 
   if (itemToRemove) {

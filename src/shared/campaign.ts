@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
-import { Item, Campaign, CampaignModel } from '.';
-import { PersistedCampaign } from './model';
+import { CampaignModel, PersistedCampaign } from './model';
+import { Campaign, Item } from './__generated__/schema-types';
 
 export const mapDatabaseModelToGql = ({
   name,
@@ -12,6 +12,7 @@ export const mapDatabaseModelToGql = ({
 }: PersistedCampaign): Campaign => {
   const items: Item[] = savedItems.map((savedItem) => ({
     __typename: 'Item',
+    // eslint-disable-next-line no-underscore-dangle
     id: savedItem._id,
     name: savedItem.name,
     description: savedItem.description,

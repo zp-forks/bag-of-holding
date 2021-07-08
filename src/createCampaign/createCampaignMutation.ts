@@ -21,6 +21,7 @@ export const createCampaignMutation: MutationResolvers['createCampaign'] =
 
     return {
       __typename: 'CreatedCampaign',
+      // eslint-disable-next-line no-underscore-dangle
       id: savedCampaign._id,
     };
   };
