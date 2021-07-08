@@ -14,6 +14,8 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@graphql-codegen/cli": "1.21.6",
     "@graphql-codegen/typescript": "1.22.4",
     "@graphql-codegen/typescript-operations": "1.18.3",
@@ -25,6 +27,7 @@
     "eslint": "^7.30.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
+    "husky": "^7.0.1",
     "jest": "^27.0.6",
     "nodemon": "^2.0.9",
     "prettier": "^2.3.2",
