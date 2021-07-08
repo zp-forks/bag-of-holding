@@ -5,6 +5,7 @@ import {
   logger,
   mapDatabaseModelToGql,
   MutationResolvers,
+  prepareCampaignForSave,
 } from '../shared';
 
 export const addItemMutation: MutationResolvers['addItem'] = async (
@@ -26,6 +27,8 @@ export const addItemMutation: MutationResolvers['addItem'] = async (
     name: input.name,
     description: input.description ?? undefined,
   } as any);
+
+  prepareCampaignForSave(savedCampaign);
 
   savedCampaign.save();
 

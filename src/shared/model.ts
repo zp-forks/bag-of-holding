@@ -7,6 +7,8 @@ interface Item extends Types.Subdocument {
 
 export interface PersistedCampaign extends Document {
   name: string;
+  electrum: number;
+  platinum: number;
   gold: number;
   silver: number;
   bronze: number;
@@ -20,6 +22,8 @@ const ItemSchema = new Schema<Item>({
 
 const CampaignSchema = new Schema<PersistedCampaign>({
   name: { type: String, required: true },
+  electrum: { type: Number, required: true },
+  platinum: { type: Number, required: true },
   gold: { type: Number, required: true },
   silver: { type: Number, required: true },
   bronze: { type: Number, required: true },

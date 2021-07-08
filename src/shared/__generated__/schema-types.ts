@@ -29,9 +29,13 @@ export type Campaign = {
   __typename: 'Campaign';
   id: Scalars['ID'];
   name: Scalars['String'];
+  electrum: Scalars['Int'];
+  platinum: Scalars['Int'];
   gold: Scalars['Int'];
   silver: Scalars['Int'];
+  /** @deprecated use copper instead */
   bronze: Scalars['Int'];
+  copper: Scalars['Int'];
   items: Array<Item>;
 };
 
@@ -56,9 +60,11 @@ export type Item = {
 
 export type ModifyMoneyInput = {
   modification: MoneyModification;
+  electrum: Scalars['Int'];
+  platinum: Scalars['Int'];
   gold: Scalars['Int'];
   silver: Scalars['Int'];
-  bronze: Scalars['Int'];
+  copper: Scalars['Int'];
 };
 
 export type ModifyMoneyResult = Campaign | CampaignNotFound;
@@ -232,9 +238,12 @@ export type AddItemResultResolvers<ContextType = any, ParentType = ResolversPare
 export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTypes['Campaign']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  electrum?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  platinum?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   bronze?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

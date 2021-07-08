@@ -14,9 +14,12 @@ export const typeDefs = gql`
   type Campaign {
     id: ID!
     name: String!
+    electrum: Int!
+    platinum: Int!
     gold: Int!
     silver: Int!
-    bronze: Int!
+    bronze: Int! @deprecated(reason: "use copper instead")
+    copper: Int!
     items: [Item!]!
   }
 
@@ -43,9 +46,11 @@ export const typeDefs = gql`
 
   input ModifyMoneyInput {
     modification: MoneyModification!
+    electrum: Int!
+    platinum: Int!
     gold: Int!
     silver: Int!
-    bronze: Int!
+    copper: Int!
   }
 
   union FetchCampaignResult = Campaign | CampaignNotFound

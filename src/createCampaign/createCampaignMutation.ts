@@ -9,6 +9,8 @@ export const createCampaignMutation: MutationResolvers['createCampaign'] =
   async (_, { name }): Promise<CreatedCampaign> => {
     const campaignToSave = new CampaignModel({
       name,
+      electrum: 0,
+      platinum: 0,
       gold: 0,
       silver: 0,
       bronze: 0,

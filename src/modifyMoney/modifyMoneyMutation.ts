@@ -6,6 +6,7 @@ import {
   mapDatabaseModelToGql,
   MoneyModification,
   MutationResolvers,
+  prepareCampaignForSave,
 } from '../shared';
 
 export const modifyMoneyMutation: MutationResolvers['modifyMoney'] = async (
@@ -23,14 +24,20 @@ export const modifyMoneyMutation: MutationResolvers['modifyMoney'] = async (
     };
   }
 
+  prepareCampaignForSave(savedCampaign);
+
   if (input.modification === MoneyModification.ADD) {
+    savedCampaign.electrum += input.electrum;
+    savedCampaign.platinum += input.platinum;
     savedCampaign.gold += input.gold;
     savedCampaign.silver += input.silver;
-    savedCampaign.bronze += input.bronze;
+    savedCampaign.bronze += input.copper;
   } else {
+    savedCampaign.electrum -= input.electrum;
+    savedCampaign.platinum -= input.platinum;
     savedCampaign.gold -= input.gold;
     savedCampaign.silver -= input.silver;
-    savedCampaign.bronze -= input.bronze;
+    savedCampaign.bronze -= input.copper;
   }
 
   savedCampaign.save();
