@@ -37,6 +37,12 @@ export const typeDefs = gql`
     description: String
   }
 
+  input EditItemInput {
+    id: ID!
+    name: String
+    description: String
+  }
+
   input RemoveItemInput {
     """
     ID of the item to be removed
@@ -55,6 +61,7 @@ export const typeDefs = gql`
 
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
+  union EditItemResult = Campaign | CampaignNotFound
   union RemoveItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
 
@@ -67,6 +74,7 @@ export const typeDefs = gql`
     createCampaign(name: String!): CreatedCampaign!
     addItem(id: ID!, input: AddItemInput!): AddItemResult!
     removeItem(id: ID!, input: RemoveItemInput!): RemoveItemResult!
+    editItem(id: ID!, input: EditItemInput!): EditItemResult!
     modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
   }
 `;

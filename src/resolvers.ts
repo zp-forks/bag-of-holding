@@ -1,5 +1,6 @@
 import { addItemMutation } from './addItem';
 import { createCampaignMutation } from './createCampaign';
+import { editItemMutation } from './editItem';
 import { fetchCampaignQuery } from './fetchCampaign';
 import { listCampaignsQuery } from './listCampaigns';
 import { modifyMoneyMutation } from './modifyMoney';
@@ -12,6 +13,7 @@ export const resolvers: Resolvers = {
     addItem: addItemMutation,
     modifyMoney: modifyMoneyMutation,
     removeItem: removeItemMutation,
+    editItem: editItemMutation,
   },
   Query: {
     listCampaigns: listCampaignsQuery,

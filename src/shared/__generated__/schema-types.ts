@@ -49,6 +49,14 @@ export type CreatedCampaign = {
   id: Scalars['ID'];
 };
 
+export type EditItemInput = {
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+export type EditItemResult = Campaign | CampaignNotFound;
+
 export type FetchCampaignResult = Campaign | CampaignNotFound;
 
 export type Item = {
@@ -79,6 +87,7 @@ export type Mutation = {
   createCampaign: CreatedCampaign;
   addItem: AddItemResult;
   removeItem: RemoveItemResult;
+  editItem: EditItemResult;
   modifyMoney: ModifyMoneyResult;
 };
 
@@ -97,6 +106,12 @@ export type MutationAddItemArgs = {
 export type MutationRemoveItemArgs = {
   id: Scalars['ID'];
   input: RemoveItemInput;
+};
+
+
+export type MutationEditItemArgs = {
+  id: Scalars['ID'];
+  input: EditItemInput;
 };
 
 
@@ -198,6 +213,8 @@ export type ResolversTypes = ResolversObject<{
   Int: ResolverTypeWrapper<Scalars['Int']>;
   CampaignNotFound: ResolverTypeWrapper<CampaignNotFound>;
   CreatedCampaign: ResolverTypeWrapper<CreatedCampaign>;
+  EditItemInput: EditItemInput;
+  EditItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   FetchCampaignResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   Item: ResolverTypeWrapper<Item>;
   ModifyMoneyInput: ModifyMoneyInput;
@@ -220,6 +237,8 @@ export type ResolversParentTypes = ResolversObject<{
   Int: Scalars['Int'];
   CampaignNotFound: CampaignNotFound;
   CreatedCampaign: CreatedCampaign;
+  EditItemInput: EditItemInput;
+  EditItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   FetchCampaignResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   Item: Item;
   ModifyMoneyInput: ModifyMoneyInput;
@@ -258,6 +277,10 @@ export type CreatedCampaignResolvers<ContextType = any, ParentType = ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type EditItemResultResolvers<ContextType = any, ParentType = ResolversParentTypes['EditItemResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
+}>;
+
 export type FetchCampaignResultResolvers<ContextType = any, ParentType = ResolversParentTypes['FetchCampaignResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
@@ -277,6 +300,7 @@ export type MutationResolvers<ContextType = any, ParentType = ResolversParentTyp
   createCampaign?: Resolver<ResolversTypes['CreatedCampaign'], ParentType, ContextType, RequireFields<MutationCreateCampaignArgs, 'name'>>;
   addItem?: Resolver<ResolversTypes['AddItemResult'], ParentType, ContextType, RequireFields<MutationAddItemArgs, 'id' | 'input'>>;
   removeItem?: Resolver<ResolversTypes['RemoveItemResult'], ParentType, ContextType, RequireFields<MutationRemoveItemArgs, 'id' | 'input'>>;
+  editItem?: Resolver<ResolversTypes['EditItemResult'], ParentType, ContextType, RequireFields<MutationEditItemArgs, 'id' | 'input'>>;
   modifyMoney?: Resolver<ResolversTypes['ModifyMoneyResult'], ParentType, ContextType, RequireFields<MutationModifyMoneyArgs, 'id' | 'input'>>;
 }>;
 
@@ -294,6 +318,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   Campaign?: CampaignResolvers<ContextType>;
   CampaignNotFound?: CampaignNotFoundResolvers<ContextType>;
   CreatedCampaign?: CreatedCampaignResolvers<ContextType>;
+  EditItemResult?: EditItemResultResolvers<ContextType>;
   FetchCampaignResult?: FetchCampaignResultResolvers<ContextType>;
   Item?: ItemResolvers<ContextType>;
   ModifyMoneyResult?: ModifyMoneyResultResolvers<ContextType>;
