@@ -26,7 +26,7 @@ mongoose
     logger.info('Connected to database');
   });
 
-const server = new ApolloServer({ schema });
+const server = new ApolloServer({ schema, playground: true });
 
 server
   .listen({ port: process.env.PORT || 4000, cors: false })
