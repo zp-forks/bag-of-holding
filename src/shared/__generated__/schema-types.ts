@@ -54,6 +54,7 @@ export type EditItemInput = {
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['Int']>;
 };
 
 export type EditItemResult = Campaign | CampaignNotFound;

@@ -43,6 +43,7 @@ export const typeDefs = gql`
     id: ID!
     name: String
     description: String
+    quantity: Int
   }
 
   input RemoveItemInput {
