@@ -21,6 +21,7 @@ export type Scalars = {
 export type AddItemInput = {
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['Int']>;
 };
 
 export type AddItemResult = Campaign | CampaignNotFound;
@@ -208,10 +209,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   AddItemInput: AddItemInput;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   AddItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   Campaign: ResolverTypeWrapper<Campaign>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   CampaignNotFound: ResolverTypeWrapper<CampaignNotFound>;
   CreatedCampaign: ResolverTypeWrapper<CreatedCampaign>;
   EditItemInput: EditItemInput;
@@ -232,10 +233,10 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   AddItemInput: AddItemInput;
   String: Scalars['String'];
+  Int: Scalars['Int'];
   AddItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   Campaign: Campaign;
   ID: Scalars['ID'];
-  Int: Scalars['Int'];
   CampaignNotFound: CampaignNotFound;
   CreatedCampaign: CreatedCampaign;
   EditItemInput: EditItemInput;

@@ -23,9 +23,12 @@ export const addItemMutation: MutationResolvers['addItem'] = async (
     };
   }
 
+  logger.info(input.quantity);
+
   savedCampaign.items.push({
     name: input.name,
     description: input.description ?? undefined,
+    quantity: input.quantity ?? 1,
   } as any);
 
   prepareCampaignForSave(savedCampaign);

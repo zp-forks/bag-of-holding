@@ -36,6 +36,7 @@ export const typeDefs = gql`
   input AddItemInput {
     name: String!
     description: String
+    quantity: Int
   }
 
   input EditItemInput {
