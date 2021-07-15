@@ -19,6 +19,7 @@ export const mapDatabaseModelToGql = ({
     id: savedItem._id,
     name: savedItem.name,
     description: savedItem.description,
+    quantity: savedItem.quantity || 1,
   }));
 
   return {

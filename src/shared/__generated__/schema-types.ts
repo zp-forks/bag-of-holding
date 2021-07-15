@@ -64,6 +64,7 @@ export type Item = {
   id: Scalars['ID'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+  quantity: Scalars['Int'];
 };
 
 export type ModifyMoneyInput = {
@@ -289,6 +290,7 @@ export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

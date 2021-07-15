@@ -10,6 +10,24 @@ describe('campaign', () => {
     silver: 4,
     bronze: 5,
     items: [
+      {
+        _id: 'unique-item-id',
+        name: 'item-1',
+        description: 'description',
+        quantity: 5,
+      },
+    ],
+  } as any;
+
+  const missingQuantityInput = {
+    _id: 'unique-campaign-id',
+    name: 'Campaign name',
+    electrum: 1,
+    platinum: 2,
+    gold: 3,
+    silver: 4,
+    bronze: 5,
+    items: [
       { _id: 'unique-item-id', name: 'item-1', description: 'description' },
     ],
   } as any;
@@ -31,10 +49,23 @@ describe('campaign', () => {
           id: 'unique-item-id',
           name: 'item-1',
           description: 'description',
+          quantity: 5,
         },
       ],
       name: 'Campaign name',
       id: 'unique-campaign-id',
+    });
+  });
+
+  it('populates quantity with 1 when database item has no quantity', () => {
+    const output = mapDatabaseModelToGql(missingQuantityInput);
+
+    expect(output.items[0]).toStrictEqual({
+      __typename: 'Item',
+      id: 'unique-item-id',
+      name: 'item-1',
+      description: 'description',
+      quantity: 1,
     });
   });
 
