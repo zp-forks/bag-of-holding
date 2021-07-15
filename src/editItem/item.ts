@@ -3,17 +3,14 @@ import { PersistedCampaign } from '../shared/model';
 
 export const modifyItem = (
   items: PersistedCampaign['items'],
-  input: EditItemInput,
+  { id: itemId, ...modifications }: EditItemInput,
 ) => {
   const itemToModify = items.find(
     // eslint-disable-next-line no-underscore-dangle
-    (item) => item._id.toString() === input.id,
+    (item) => item._id.toString() === itemId,
   );
 
-  if (itemToModify) {
-    if (input.name) itemToModify.name = input.name;
-    if (input.description) itemToModify.description = input.description;
-  }
+  if (itemToModify) Object.assign(itemToModify, { ...modifications });
 
   return itemToModify;
 };
