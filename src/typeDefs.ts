@@ -28,6 +28,10 @@ export const typeDefs = gql`
     message: String!
   }
 
+  type InvalidInput {
+    message: String!
+  }
+
   enum MoneyModification {
     ADD
     DEDUCT
@@ -64,7 +68,7 @@ export const typeDefs = gql`
 
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
-  union EditItemResult = Campaign | CampaignNotFound
+  union EditItemResult = Campaign | CampaignNotFound | InvalidInput
   union RemoveItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
 
