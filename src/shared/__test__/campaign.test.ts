@@ -16,6 +16,7 @@ describe('campaign', () => {
         notes: 'notes',
         description: 'description',
         quantity: 5,
+        tags: ['tag'],
       },
     ],
   } as any;
@@ -29,7 +30,7 @@ describe('campaign', () => {
     silver: 4,
     bronze: 5,
     items: [
-      { _id: 'unique-item-id', name: 'item-1', description: 'description' },
+      { _id: 'unique-item-id', name: 'item-1', description: 'description', tags: ['tag'] },
     ],
   } as any;
 
@@ -47,6 +48,7 @@ describe('campaign', () => {
         name: 'item-1',
         description: 'description',
         quantity: 0,
+        tags: ['tag'],
       },
     ],
   } as any;
@@ -70,6 +72,7 @@ describe('campaign', () => {
           description: 'description',
           quantity: 5,
           notes: 'notes',
+          tags: ['tag'],
         },
       ],
       name: 'Campaign name',
@@ -109,6 +112,17 @@ describe('campaign', () => {
     const output = mapDatabaseModelToGql(input);
 
     expect(output.items[0].notes).toStrictEqual(undefined);
+  });
+
+  it('maps an item without tags', () => {
+    const input = {
+      ...fullInput,
+      items: [{ _id: 'unique-item-id', name: 'item-1', notes: 'notes' }],
+    } as any;
+
+    const output = mapDatabaseModelToGql(input);
+
+    expect(output.items[0].tags).toStrictEqual(undefined);
   });
 
   it('handles undefined money values sensible', () => {

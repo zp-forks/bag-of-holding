@@ -5,6 +5,7 @@ interface Item extends Types.Subdocument {
   description?: string;
   quantity?: number;
   notes?: string;
+  tags?: string[];
 }
 
 export interface PersistedCampaign extends Document {
@@ -22,6 +23,7 @@ const ItemSchema = new Schema<Item>({
   description: { type: String },
   notes: { type: String },
   quantity: { type: Number },
+  tags: [{ type: String }],
 });
 
 const CampaignSchema = new Schema<PersistedCampaign>({
