@@ -22,6 +22,7 @@ export type AddItemInput = {
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['Int']>;
+  notes?: Maybe<Scalars['String']>;
 };
 
 export type AddItemResult = Campaign | CampaignNotFound;
@@ -55,6 +56,7 @@ export type EditItemInput = {
   name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['Int']>;
+  notes?: Maybe<Scalars['String']>;
 };
 
 export type EditItemResult = Campaign | CampaignNotFound | InvalidInput;
@@ -72,6 +74,7 @@ export type Item = {
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   quantity: Scalars['Int'];
+  notes?: Maybe<Scalars['String']>;
 };
 
 export type ModifyMoneyInput = {
@@ -305,6 +308,7 @@ export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

@@ -13,6 +13,7 @@ describe('campaign', () => {
       {
         _id: 'unique-item-id',
         name: 'item-1',
+        notes: 'notes',
         description: 'description',
         quantity: 5,
       },
@@ -68,6 +69,7 @@ describe('campaign', () => {
           name: 'item-1',
           description: 'description',
           quantity: 5,
+          notes: 'notes',
         },
       ],
       name: 'Campaign name',
@@ -78,25 +80,13 @@ describe('campaign', () => {
   it('populates quantity with 1 when database item has no quantity', () => {
     const output = mapDatabaseModelToGql(missingQuantityInput);
 
-    expect(output.items[0]).toStrictEqual({
-      __typename: 'Item',
-      id: 'unique-item-id',
-      name: 'item-1',
-      description: 'description',
-      quantity: 1,
-    });
+    expect(output.items[0].quantity).toStrictEqual(1);
   });
 
   it('populates quantity with 0 when database item quantity is 0', () => {
     const output = mapDatabaseModelToGql(zeroQuantityItemInput);
 
-    expect(output.items[0]).toStrictEqual({
-      __typename: 'Item',
-      id: 'unique-item-id',
-      name: 'item-1',
-      description: 'description',
-      quantity: 0,
-    });
+    expect(output.items[0].quantity).toStrictEqual(0);
   });
 
   it('maps an item without description', () => {
@@ -108,6 +98,17 @@ describe('campaign', () => {
     const output = mapDatabaseModelToGql(input);
 
     expect(output.items[0].description).toStrictEqual(undefined);
+  });
+
+  it('maps an item without notes', () => {
+    const input = {
+      ...fullInput,
+      items: [{ _id: 'unique-item-id', name: 'item-1' }],
+    } as any;
+
+    const output = mapDatabaseModelToGql(input);
+
+    expect(output.items[0].notes).toStrictEqual(undefined);
   });
 
   it('handles undefined money values sensible', () => {
