@@ -23,6 +23,7 @@ export type AddItemInput = {
   description?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['Int']>;
   notes?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type AddItemResult = Campaign | CampaignNotFound;
@@ -57,6 +58,7 @@ export type EditItemInput = {
   description?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['Int']>;
   notes?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type EditItemResult = Campaign | CampaignNotFound | InvalidInput;
@@ -75,6 +77,7 @@ export type Item = {
   description?: Maybe<Scalars['String']>;
   quantity: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type ModifyMoneyInput = {
@@ -309,6 +312,7 @@ export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  tags?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
