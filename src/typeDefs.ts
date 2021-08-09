@@ -10,6 +10,7 @@ export const typeDefs = gql`
     name: String!
     description: String
     quantity: Int!
+    notes: String
   }
 
   type Campaign {
@@ -41,6 +42,7 @@ export const typeDefs = gql`
     name: String!
     description: String
     quantity: Int
+    notes: String
   }
 
   input EditItemInput {
@@ -48,6 +50,7 @@ export const typeDefs = gql`
     name: String
     description: String
     quantity: Int
+    notes: String
   }
 
   input RemoveItemInput {

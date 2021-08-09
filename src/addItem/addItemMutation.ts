@@ -29,6 +29,7 @@ export const addItemMutation: MutationResolvers['addItem'] = async (
     name: input.name,
     description: input.description ?? undefined,
     quantity: input.quantity ?? 1,
+    notes: input.notes,
   } as any);
 
   prepareCampaignForSave(savedCampaign);
