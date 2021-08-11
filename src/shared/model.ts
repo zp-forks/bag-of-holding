@@ -1,6 +1,6 @@
 import { Document, model, Schema, Types } from 'mongoose';
 
-interface Item extends Types.Subdocument {
+export interface PersistedItem extends Types.Subdocument {
   name: string;
   description?: string;
   quantity?: number;
@@ -15,10 +15,10 @@ export interface PersistedCampaign extends Document {
   gold: number;
   silver: number;
   bronze: number;
-  items: Item[];
+  items: PersistedItem[];
 }
 
-const ItemSchema = new Schema<Item>({
+const ItemSchema = new Schema<PersistedItem>({
   name: { type: String, required: true },
   description: { type: String },
   notes: { type: String },
