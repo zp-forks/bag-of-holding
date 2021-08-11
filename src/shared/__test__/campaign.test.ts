@@ -30,7 +30,12 @@ describe('campaign', () => {
     silver: 4,
     bronze: 5,
     items: [
-      { _id: 'unique-item-id', name: 'item-1', description: 'description', tags: ['tag'] },
+      {
+        _id: 'unique-item-id',
+        name: 'item-1',
+        description: 'description',
+        tags: ['tag'],
+      },
     ],
   } as any;
 

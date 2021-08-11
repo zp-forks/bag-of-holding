@@ -30,6 +30,10 @@ export const typeDefs = gql`
     message: String!
   }
 
+  type ItemNotFound {
+    message: String!
+  }
+
   type InvalidInput {
     message: String!
   }
@@ -77,6 +81,8 @@ export const typeDefs = gql`
   union EditItemResult = Campaign | CampaignNotFound | InvalidInput
   union RemoveItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
+  union AddTagResult = Campaign | CampaignNotFound | ItemNotFound
+  union RemoveTagResult = Campaign | CampaignNotFound | ItemNotFound
 
   type Query {
     listCampaigns: [Campaign]!
@@ -89,5 +95,7 @@ export const typeDefs = gql`
     removeItem(id: ID!, input: RemoveItemInput!): RemoveItemResult!
     editItem(id: ID!, input: EditItemInput!): EditItemResult!
     modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
+    addTag(campaignId: ID!, itemId: ID!, tag: String!): AddTagResult!
+    removeTag(campaignId: ID!, itemId: ID!, tag: String!): RemoveTagResult!
   }
 `;
