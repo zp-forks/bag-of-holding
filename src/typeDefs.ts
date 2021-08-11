@@ -11,7 +11,7 @@ export const typeDefs = gql`
     description: String
     quantity: Int!
     notes: String
-    tags: [String]
+    tags: [String!]
   }
 
   type Campaign {
@@ -48,7 +48,7 @@ export const typeDefs = gql`
     description: String
     quantity: Int
     notes: String
-    tags: [String]
+    tags: [String!]
   }
 
   input EditItemInput {
@@ -57,7 +57,7 @@ export const typeDefs = gql`
     description: String
     quantity: Int
     notes: String
-    tags: [String]
+    tags: [String!]
   }
 
   input RemoveItemInput {
