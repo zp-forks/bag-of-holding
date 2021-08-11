@@ -3,6 +3,7 @@ import {
   CampaignNotFound,
   getCampaignById,
   InvalidInput,
+  ItemNotFound,
   logger,
   mapDatabaseModelToGql,
   MutationResolvers,
@@ -12,7 +13,7 @@ import { modifyItem } from './item';
 export const editItemMutation: MutationResolvers['editItem'] = async (
   _,
   { id, input },
-): Promise<Campaign | CampaignNotFound | InvalidInput> => {
+): Promise<Campaign | CampaignNotFound | InvalidInput | ItemNotFound> => {
   logger.info(`Updating item: ${input.id} from campaign ${id}`);
 
   if (input.quantity && input.quantity < 0) {
@@ -31,7 +32,14 @@ export const editItemMutation: MutationResolvers['editItem'] = async (
     };
   }
 
-  modifyItem(savedCampaign.items, input);
+  const item = modifyItem(savedCampaign.items, input);
+
+  if (!item) {
+    return {
+      __typename: 'ItemNotFound',
+      message: `No item found with ID ${input.id}`,
+    };
+  }
 
   savedCampaign.save();
 

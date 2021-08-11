@@ -61,7 +61,7 @@ export type EditItemInput = {
   tags?: Maybe<Array<Scalars['String']>>;
 };
 
-export type EditItemResult = Campaign | CampaignNotFound | InvalidInput;
+export type EditItemResult = Campaign | CampaignNotFound | InvalidInput | ItemNotFound;
 
 export type FetchCampaignResult = Campaign | CampaignNotFound;
 
@@ -255,7 +255,7 @@ export type ResolversTypes = ResolversObject<{
   CampaignNotFound: ResolverTypeWrapper<CampaignNotFound>;
   CreatedCampaign: ResolverTypeWrapper<CreatedCampaign>;
   EditItemInput: EditItemInput;
-  EditItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'] | ResolversTypes['InvalidInput'];
+  EditItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'] | ResolversTypes['InvalidInput'] | ResolversTypes['ItemNotFound'];
   FetchCampaignResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   InvalidInput: ResolverTypeWrapper<InvalidInput>;
   Item: ResolverTypeWrapper<Item>;
@@ -284,7 +284,7 @@ export type ResolversParentTypes = ResolversObject<{
   CampaignNotFound: CampaignNotFound;
   CreatedCampaign: CreatedCampaign;
   EditItemInput: EditItemInput;
-  EditItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'] | ResolversParentTypes['InvalidInput'];
+  EditItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'] | ResolversParentTypes['InvalidInput'] | ResolversParentTypes['ItemNotFound'];
   FetchCampaignResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   InvalidInput: InvalidInput;
   Item: Item;
@@ -331,7 +331,7 @@ export type CreatedCampaignResolvers<ContextType = any, ParentType = ResolversPa
 }>;
 
 export type EditItemResultResolvers<ContextType = any, ParentType = ResolversParentTypes['EditItemResult']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound' | 'InvalidInput', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound' | 'InvalidInput' | 'ItemNotFound', ParentType, ContextType>;
 }>;
 
 export type FetchCampaignResultResolvers<ContextType = any, ParentType = ResolversParentTypes['FetchCampaignResult']> = ResolversObject<{

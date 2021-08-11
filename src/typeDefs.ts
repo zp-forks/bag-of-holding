@@ -82,7 +82,11 @@ export const typeDefs = gql`
 
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
-  union EditItemResult = Campaign | CampaignNotFound | InvalidInput
+  union EditItemResult =
+      Campaign
+    | CampaignNotFound
+    | InvalidInput
+    | ItemNotFound
   union RemoveItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
   union AddTagResult = Campaign | CampaignNotFound | ItemNotFound
