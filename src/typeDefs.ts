@@ -21,7 +21,6 @@ export const typeDefs = gql`
     platinum: Int!
     gold: Int!
     silver: Int!
-    bronze: Int! @deprecated(reason: "use copper instead")
     copper: Int!
     items: [Item!]!
   }

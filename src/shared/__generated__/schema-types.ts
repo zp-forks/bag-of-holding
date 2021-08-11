@@ -38,8 +38,6 @@ export type Campaign = {
   platinum: Scalars['Int'];
   gold: Scalars['Int'];
   silver: Scalars['Int'];
-  /** @deprecated use copper instead */
-  bronze: Scalars['Int'];
   copper: Scalars['Int'];
   items: Array<Item>;
 };
@@ -317,7 +315,6 @@ export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTyp
   platinum?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  bronze?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

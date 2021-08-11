@@ -68,7 +68,6 @@ describe('campaign', () => {
       gold: 3,
       silver: 4,
       copper: 5,
-      bronze: 0,
       items: [
         {
           __typename: 'Item',
@@ -146,7 +145,6 @@ describe('campaign', () => {
       gold: 0,
       silver: 0,
       copper: 0,
-      bronze: 0,
       items: [],
       name: 'Campaign name',
       id: 'unique-campaign-id',

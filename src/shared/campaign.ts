@@ -34,7 +34,6 @@ export const mapDatabaseModelToGql = ({
     gold: gold || 0,
     silver: silver || 0,
     copper: bronze || 0,
-    bronze: 0,
   };
 };
 
