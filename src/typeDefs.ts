@@ -12,6 +12,8 @@ export const typeDefs = gql`
     quantity: Int!
     notes: String
     tags: [String!]!
+    createdAt: String!
+    updatedAt: String
   }
 
   type Campaign {
@@ -23,6 +25,7 @@ export const typeDefs = gql`
     silver: Int!
     copper: Int!
     items: [Item!]!
+    createdAt: String!
   }
 
   type CampaignNotFound {

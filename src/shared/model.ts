@@ -6,6 +6,7 @@ export interface PersistedItem extends Types.Subdocument {
   quantity?: number;
   notes?: string;
   tags?: string[];
+  updatedAt?: Date;
 }
 
 export interface PersistedCampaign extends Document {
@@ -18,13 +19,16 @@ export interface PersistedCampaign extends Document {
   items: PersistedItem[];
 }
 
-const ItemSchema = new Schema<PersistedItem>({
-  name: { type: String, required: true },
-  description: { type: String },
-  notes: { type: String },
-  quantity: { type: Number },
-  tags: [{ type: String }],
-});
+const ItemSchema = new Schema<PersistedItem>(
+  {
+    name: { type: String, required: true },
+    description: { type: String },
+    notes: { type: String },
+    quantity: { type: Number },
+    tags: [{ type: String }],
+  },
+  { timestamps: true },
+);
 
 const CampaignSchema = new Schema<PersistedCampaign>({
   name: { type: String, required: true },

@@ -11,6 +11,9 @@ const mapItemDatabaseModelToGql = (savedItem: PersistedItem): Item => ({
   quantity: savedItem.quantity ?? 1,
   notes: savedItem.notes,
   tags: savedItem.tags || [],
+  // eslint-disable-next-line no-underscore-dangle
+  createdAt: savedItem._id.getTimestamp().toISOString(),
+  updatedAt: savedItem.updatedAt?.toISOString(),
 });
 
 export const mapDatabaseModelToGql = ({
@@ -35,6 +38,7 @@ export const mapDatabaseModelToGql = ({
     gold: gold || 0,
     silver: silver || 0,
     copper: bronze || 0,
+    createdAt: id.getTimestamp().toISOString(),
   };
 };
 

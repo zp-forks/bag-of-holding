@@ -40,6 +40,7 @@ export type Campaign = {
   silver: Scalars['Int'];
   copper: Scalars['Int'];
   items: Array<Item>;
+  createdAt: Scalars['String'];
 };
 
 export type CampaignNotFound = {
@@ -78,6 +79,8 @@ export type Item = {
   quantity: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  createdAt: Scalars['String'];
+  updatedAt?: Maybe<Scalars['String']>;
 };
 
 export type ItemNotFound = {
@@ -317,6 +320,7 @@ export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTyp
   silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -350,6 +354,8 @@ export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
