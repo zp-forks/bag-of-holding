@@ -127,7 +127,7 @@ describe('campaign', () => {
 
     const output = mapDatabaseModelToGql(input);
 
-    expect(output.items[0].tags).toStrictEqual(undefined);
+    expect(output.items[0].tags).toStrictEqual([]);
   });
 
   it('handles undefined money values sensible', () => {

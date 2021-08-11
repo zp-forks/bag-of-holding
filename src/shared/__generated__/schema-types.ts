@@ -79,7 +79,7 @@ export type Item = {
   description?: Maybe<Scalars['String']>;
   quantity: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Scalars['String']>>;
+  tags: Array<Scalars['String']>;
 };
 
 export type ItemNotFound = {
@@ -97,6 +97,11 @@ export type ModifyMoneyInput = {
 };
 
 export type ModifyMoneyResult = Campaign | CampaignNotFound;
+
+export type ModifyTagsInput = {
+  itemId: Scalars['ID'];
+  tag: Scalars['String'];
+};
 
 export enum MoneyModification {
   ADD = 'ADD',
@@ -145,16 +150,14 @@ export type MutationModifyMoneyArgs = {
 
 
 export type MutationAddTagArgs = {
-  campaignId: Scalars['ID'];
-  itemId: Scalars['ID'];
-  tag: Scalars['String'];
+  id: Scalars['ID'];
+  input: ModifyTagsInput;
 };
 
 
 export type MutationRemoveTagArgs = {
-  campaignId: Scalars['ID'];
-  itemId: Scalars['ID'];
-  tag: Scalars['String'];
+  id: Scalars['ID'];
+  input: ModifyTagsInput;
 };
 
 export type Query = {
@@ -261,6 +264,7 @@ export type ResolversTypes = ResolversObject<{
   ItemNotFound: ResolverTypeWrapper<ItemNotFound>;
   ModifyMoneyInput: ModifyMoneyInput;
   ModifyMoneyResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
+  ModifyTagsInput: ModifyTagsInput;
   MoneyModification: MoneyModification;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -289,6 +293,7 @@ export type ResolversParentTypes = ResolversObject<{
   ItemNotFound: ItemNotFound;
   ModifyMoneyInput: ModifyMoneyInput;
   ModifyMoneyResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
+  ModifyTagsInput: ModifyTagsInput;
   Mutation: {};
   Query: {};
   RemoveItemInput: RemoveItemInput;
@@ -347,7 +352,7 @@ export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  tags?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -366,8 +371,8 @@ export type MutationResolvers<ContextType = any, ParentType = ResolversParentTyp
   removeItem?: Resolver<ResolversTypes['RemoveItemResult'], ParentType, ContextType, RequireFields<MutationRemoveItemArgs, 'id' | 'input'>>;
   editItem?: Resolver<ResolversTypes['EditItemResult'], ParentType, ContextType, RequireFields<MutationEditItemArgs, 'id' | 'input'>>;
   modifyMoney?: Resolver<ResolversTypes['ModifyMoneyResult'], ParentType, ContextType, RequireFields<MutationModifyMoneyArgs, 'id' | 'input'>>;
-  addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'campaignId' | 'itemId' | 'tag'>>;
-  removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'campaignId' | 'itemId' | 'tag'>>;
+  addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'id' | 'input'>>;
+  removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'id' | 'input'>>;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
