@@ -42,7 +42,9 @@ export const mapDatabaseModelToGql = ({
   };
 };
 
-export const getCampaignById = async (id: string) => {
+export const getCampaignById = async (
+  id: string,
+): Promise<PersistedCampaign | null> => {
   if (!Types.ObjectId.isValid(id)) {
     return null;
   }

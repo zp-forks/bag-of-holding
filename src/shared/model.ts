@@ -40,6 +40,17 @@ const CampaignSchema = new Schema<PersistedCampaign>({
   items: [ItemSchema],
 });
 
+export interface PersistedConfig extends Types.Subdocument {
+  updatedAt?: Date;
+}
+
+const ConfigSchema = new Schema<PersistedConfig>(
+  { campaignId: { type: Schema.Types.ObjectId, required: true } },
+  { timestamps: true },
+);
+
+export const ConfigModel = model<PersistedConfig>('Config', ConfigSchema);
+
 export const CampaignModel = model<PersistedCampaign>(
   'Campaign',
   CampaignSchema,

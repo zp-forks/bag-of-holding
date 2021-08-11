@@ -16,6 +16,11 @@ export const typeDefs = gql`
     updatedAt: String
   }
 
+  type CampaignConfig {
+    id: ID!
+    updatedAt: String
+  }
+
   type Campaign {
     id: ID!
     name: String!
@@ -26,6 +31,7 @@ export const typeDefs = gql`
     copper: Int!
     items: [Item!]!
     createdAt: String!
+    config: CampaignConfig
   }
 
   type CampaignNotFound {
@@ -94,6 +100,7 @@ export const typeDefs = gql`
   union ModifyMoneyResult = Campaign | CampaignNotFound
   union AddTagResult = Campaign | CampaignNotFound | ItemNotFound
   union RemoveTagResult = Campaign | CampaignNotFound | ItemNotFound
+  union EditConfigResult = CampaignConfig | CampaignNotFound
 
   type Query {
     listCampaigns: [Campaign]!
@@ -108,5 +115,6 @@ export const typeDefs = gql`
     modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
     addTag(id: ID!, input: ModifyTagsInput!): AddTagResult!
     removeTag(id: ID!, input: ModifyTagsInput!): RemoveTagResult!
+    editConfig(id: ID!): EditConfigResult!
   }
 `;
