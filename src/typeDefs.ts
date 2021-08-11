@@ -11,7 +11,7 @@ export const typeDefs = gql`
     description: String
     quantity: Int!
     notes: String
-    tags: [String!]
+    tags: [String!]!
   }
 
   type Campaign {
@@ -76,6 +76,11 @@ export const typeDefs = gql`
     copper: Int!
   }
 
+  input ModifyTagsInput {
+    itemId: ID!
+    tag: String!
+  }
+
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
   union EditItemResult = Campaign | CampaignNotFound | InvalidInput
@@ -95,7 +100,7 @@ export const typeDefs = gql`
     removeItem(id: ID!, input: RemoveItemInput!): RemoveItemResult!
     editItem(id: ID!, input: EditItemInput!): EditItemResult!
     modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
-    addTag(campaignId: ID!, itemId: ID!, tag: String!): AddTagResult!
-    removeTag(campaignId: ID!, itemId: ID!, tag: String!): RemoveTagResult!
+    addTag(id: ID!, input: ModifyTagsInput!): AddTagResult!
+    removeTag(id: ID!, input: ModifyTagsInput!): RemoveTagResult!
   }
 `;

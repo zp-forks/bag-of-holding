@@ -9,16 +9,16 @@ import {
 
 export const removeTagMutation: MutationResolvers['addTag'] = async (
   _,
-  { campaignId, itemId, tag },
+  { id, input: { itemId, tag } },
 ): Promise<AddTagResult> => {
   logger.info(`Removing tag from item with ID ${itemId}`);
 
-  const savedCampaign = await getCampaignById(campaignId);
+  const savedCampaign = await getCampaignById(id);
 
   if (!savedCampaign) {
     return {
       __typename: 'CampaignNotFound',
-      message: `No campaign with ID ${campaignId}`,
+      message: `No campaign with ID ${id}`,
     };
   }
 
@@ -28,7 +28,7 @@ export const removeTagMutation: MutationResolvers['addTag'] = async (
   if (!savedItem) {
     return {
       __typename: 'ItemNotFound',
-      message: `No item with ID ${itemId} on campaign ${campaignId}`,
+      message: `No item with ID ${itemId} on campaign ${id}`,
     };
   }
 
