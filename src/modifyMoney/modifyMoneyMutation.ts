@@ -6,7 +6,6 @@ import {
   mapDatabaseModelToGql,
   MoneyModification,
   MutationResolvers,
-  prepareCampaignForSave,
 } from '../shared';
 
 export const modifyMoneyMutation: MutationResolvers['modifyMoney'] = async (
@@ -23,8 +22,6 @@ export const modifyMoneyMutation: MutationResolvers['modifyMoney'] = async (
       message: `No campaign with ID ${id}`,
     };
   }
-
-  prepareCampaignForSave(savedCampaign);
 
   if (input.modification === MoneyModification.ADD) {
     savedCampaign.electrum += input.electrum;

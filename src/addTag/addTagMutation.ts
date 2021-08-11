@@ -4,7 +4,6 @@ import {
   logger,
   mapDatabaseModelToGql,
   MutationResolvers,
-  prepareCampaignForSave,
 } from '../shared';
 
 export const addTagMutation: MutationResolvers['addTag'] = async (
@@ -37,8 +36,6 @@ export const addTagMutation: MutationResolvers['addTag'] = async (
   tagSet.add(tag);
 
   savedItem.tags = [...tagSet];
-
-  prepareCampaignForSave(savedCampaign);
 
   savedCampaign.save();
 

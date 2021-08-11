@@ -1,4 +1,4 @@
-import { mapDatabaseModelToGql, prepareCampaignForSave } from '../campaign';
+import { mapDatabaseModelToGql } from '../campaign';
 
 describe('campaign', () => {
   const fullInput = {
@@ -149,30 +149,5 @@ describe('campaign', () => {
       name: 'Campaign name',
       id: 'unique-campaign-id',
     });
-  });
-
-  it('does not modify a ready to save campaign', () => {
-    const output = prepareCampaignForSave(fullInput);
-
-    expect(output).toStrictEqual(fullInput);
-  });
-
-  it('removes undefined values where for money', () => {
-    const input = {
-      ...fullInput,
-      electrum: undefined,
-      platinum: undefined,
-      gold: undefined,
-      silver: undefined,
-      bronze: undefined,
-    };
-
-    const output = prepareCampaignForSave(input);
-
-    expect(output.electrum).toStrictEqual(0);
-    expect(output.platinum).toStrictEqual(0);
-    expect(output.gold).toStrictEqual(0);
-    expect(output.silver).toStrictEqual(0);
-    expect(output.bronze).toStrictEqual(0);
   });
 });

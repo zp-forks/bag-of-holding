@@ -5,7 +5,6 @@ import {
   logger,
   mapDatabaseModelToGql,
   MutationResolvers,
-  prepareCampaignForSave,
 } from '../shared';
 
 export const removeItemMutation: MutationResolvers['removeItem'] = async (
@@ -31,7 +30,6 @@ export const removeItemMutation: MutationResolvers['removeItem'] = async (
   if (itemToRemove) {
     const spliceIndex = savedCampaign.items.indexOf(itemToRemove);
     savedCampaign.items.splice(spliceIndex, 1);
-    prepareCampaignForSave(savedCampaign);
     await savedCampaign.save();
   }
 

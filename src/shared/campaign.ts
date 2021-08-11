@@ -46,15 +46,3 @@ export const getCampaignById = async (id: string) => {
 
   return savedCampaign;
 };
-
-export const prepareCampaignForSave = (
-  campaign: PersistedCampaign,
-): PersistedCampaign => {
-  campaign.electrum = campaign.electrum || 0;
-  campaign.platinum = campaign.platinum || 0;
-  campaign.gold = campaign.gold || 0;
-  campaign.silver = campaign.silver || 0;
-  campaign.bronze = campaign.bronze || 0;
-
-  return campaign;
-};

@@ -6,7 +6,6 @@ import {
   logger,
   mapDatabaseModelToGql,
   MutationResolvers,
-  prepareCampaignForSave,
 } from '../shared';
 import { modifyItem } from './item';
 
@@ -33,7 +32,6 @@ export const editItemMutation: MutationResolvers['editItem'] = async (
   }
 
   modifyItem(savedCampaign.items, input);
-  prepareCampaignForSave(savedCampaign);
 
   savedCampaign.save();
 
