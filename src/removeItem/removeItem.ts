@@ -13,7 +13,7 @@ export const removeItem: MutationResolvers['removeItem'] = async (
 
     return {
       __typename: 'Campaign',
-      ...campaign!,
+      ...campaign,
     };
   } catch {
     return {

@@ -55,7 +55,8 @@
     "test:watch": "jest --coverage --watchAll",
     "lint": "eslint ./src --ext ts",
     "prettier": "prettier --write .",
-    "gen:types": "graphql-codegen --config codegen-server.yml",
-    "gen:db:schema": "prisma generate"
+    "gql:gen": "graphql-codegen --config codegen-server.yml",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy"
   }
 }

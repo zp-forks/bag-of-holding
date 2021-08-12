@@ -1,15 +1,14 @@
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["mongoDb"]
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
 }
 
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+generator client {
+  provider = "prisma-client-js"
 }
 
 model Campaign {
-  id        String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   name      String
   platinum  Int      @default(0)
@@ -21,7 +20,7 @@ model Campaign {
 }
 
 model Item {
-  id          String    @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  id          String    @id @default(uuid())
   name        String
   description String?
   notes       String?
@@ -29,6 +28,6 @@ model Item {
   quantity    Int       @default(1)
   updatedAt   DateTime?
   createdAt   DateTime  @default(now())
-  campaign    Campaign? @relation(fields: [campaignId], references: [id])
-  campaignId  String    @db.ObjectId
+  campaign    Campaign  @relation(fields: [campaignId], references: [id])
+  campaignId  String
 }
