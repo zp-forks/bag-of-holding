@@ -68,6 +68,8 @@ export type EditItemResult = Item | InvalidInput | ItemNotFound;
 
 export type FetchCampaignResult = Campaign | CampaignNotFound;
 
+export type FetchItemResult = Item | ItemNotFound;
+
 export type InvalidInput = {
   __typename: 'InvalidInput';
   message: Scalars['String'];
@@ -161,11 +163,17 @@ export type Query = {
   __typename: 'Query';
   campaigns: Array<Campaign>;
   campaign: FetchCampaignResult;
+  item?: Maybe<FetchItemResult>;
 };
 
 
 export type QueryCampaignArgs = {
   campaignId: Scalars['ID'];
+};
+
+
+export type QueryItemArgs = {
+  itemId: Scalars['ID'];
 };
 
 export type RemoveItemInput = {
@@ -257,6 +265,7 @@ export type ResolversTypes = ResolversObject<{
   EditItemInput: EditItemInput;
   EditItemResult: ResolversTypes['Item'] | ResolversTypes['InvalidInput'] | ResolversTypes['ItemNotFound'];
   FetchCampaignResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
+  FetchItemResult: ResolversTypes['Item'] | ResolversTypes['ItemNotFound'];
   InvalidInput: ResolverTypeWrapper<InvalidInput>;
   Item: ResolverTypeWrapper<Item>;
   ItemNotFound: ResolverTypeWrapper<ItemNotFound>;
@@ -286,6 +295,7 @@ export type ResolversParentTypes = ResolversObject<{
   EditItemInput: EditItemInput;
   EditItemResult: ResolversParentTypes['Item'] | ResolversParentTypes['InvalidInput'] | ResolversParentTypes['ItemNotFound'];
   FetchCampaignResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
+  FetchItemResult: ResolversParentTypes['Item'] | ResolversParentTypes['ItemNotFound'];
   InvalidInput: InvalidInput;
   Item: Item;
   ItemNotFound: ItemNotFound;
@@ -342,6 +352,10 @@ export type FetchCampaignResultResolvers<ContextType = GQLContext, ParentType = 
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
 
+export type FetchItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['FetchItemResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Item' | 'ItemNotFound', ParentType, ContextType>;
+}>;
+
 export type InvalidInputResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['InvalidInput']> = ResolversObject<{
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -381,6 +395,7 @@ export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversPa
 export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
   campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
   campaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryCampaignArgs, 'campaignId'>>;
+  item?: Resolver<Maybe<ResolversTypes['FetchItemResult']>, ParentType, ContextType, RequireFields<QueryItemArgs, 'itemId'>>;
 }>;
 
 export type RemoveItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveItemResult']> = ResolversObject<{
@@ -400,6 +415,7 @@ export type Resolvers<ContextType = GQLContext> = ResolversObject<{
   Date?: GraphQLScalarType;
   EditItemResult?: EditItemResultResolvers<ContextType>;
   FetchCampaignResult?: FetchCampaignResultResolvers<ContextType>;
+  FetchItemResult?: FetchItemResultResolvers<ContextType>;
   InvalidInput?: InvalidInputResolvers<ContextType>;
   Item?: ItemResolvers<ContextType>;
   ItemNotFound?: ItemNotFoundResolvers<ContextType>;

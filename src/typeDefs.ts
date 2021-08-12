@@ -93,6 +93,7 @@ export const typeDefs = gql`
   union ModifyMoneyResult = Campaign | CampaignNotFound
   union RemoveItemResult = Campaign | ItemNotFound
 
+  union FetchItemResult = Item | ItemNotFound
   union EditItemResult = Item | InvalidInput | ItemNotFound
   union AddTagResult = Item | ItemNotFound
   union RemoveTagResult = Item | ItemNotFound
@@ -100,6 +101,7 @@ export const typeDefs = gql`
   type Query {
     campaigns: [Campaign!]!
     campaign(campaignId: ID!): FetchCampaignResult!
+    item(itemId: ID!): FetchItemResult
   }
 
   type Mutation {
