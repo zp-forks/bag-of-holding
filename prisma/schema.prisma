@@ -29,6 +29,6 @@ model Item {
   quantity    Int       @default(1)
   updatedAt   DateTime?
   createdAt   DateTime  @default(now())
-  Campaign    Campaign? @relation(fields: [campaignId], references: [id])
+  campaign    Campaign? @relation(fields: [campaignId], references: [id])
   campaignId  String    @db.ObjectId
 }

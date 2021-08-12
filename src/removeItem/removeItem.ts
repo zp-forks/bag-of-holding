@@ -5,9 +5,9 @@ export const removeItem: MutationResolvers['removeItem'] = async (
   { itemId },
   { prisma },
 ): Promise<RemoveItemResult> => {
-  const { Campaign: campaign } = await prisma.item.delete({
+  const { campaign } = await prisma.item.delete({
     where: { id: itemId },
-    include: { Campaign: true },
+    include: { campaign: true },
   });
 
   if (!campaign) {
