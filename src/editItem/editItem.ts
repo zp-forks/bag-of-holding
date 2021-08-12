@@ -16,6 +16,7 @@ export const editItem: MutationResolvers['editItem'] = async (
     const item = await prisma.item.update({
       data: {
         ...input,
+        quantity: quantity ?? undefined,
         name: name ?? undefined,
         tags: tags ?? undefined,
         updatedAt: new Date(),
