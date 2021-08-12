@@ -5,21 +5,22 @@ export const fetchCampaign: QueryResolvers['campaign'] = async (
   { campaignId },
   { prisma },
 ): Promise<FetchCampaignResult> => {
-  const campaign = await prisma.campaign.findUnique({
-    where: { id: campaignId },
-  });
+  try {
+    const campaign = await prisma.campaign.findUnique({
+      where: { id: campaignId },
+      rejectOnNotFound: true,
+    });
 
-  if (!campaign) {
+    logger.info(`Fetched campaign ${campaignId}`);
+
+    return {
+      __typename: 'Campaign',
+      ...campaign,
+    };
+  } catch {
     return {
       __typename: 'CampaignNotFound',
       message: `Campaign with ID ${campaignId} does not exist`,
     };
   }
-
-  logger.info(`Fetched campaign ${campaignId}`);
-
-  return {
-    __typename: 'Campaign',
-    ...campaign,
-  };
 };

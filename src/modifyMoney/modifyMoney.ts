@@ -30,18 +30,18 @@ export const modifyMoney: MutationResolvers['modifyMoney'] = async (
     };
   }
 
-  const campaign = await prisma.campaign.update({
-    where: { id: campaignId },
-    data,
-  });
+  try {
+    const campaign = await prisma.campaign.update({
+      where: { id: campaignId },
+      data,
+    });
 
-  if (!campaign) {
+    logger.info(`Updated currency on campaign ${campaignId}`);
+    return { __typename: 'Campaign', ...campaign };
+  } catch {
     return {
       __typename: 'CampaignNotFound',
       message: `Campaign with ID ${campaignId} does not exist`,
     };
   }
-
-  logger.info(`Updated currency on campaign ${campaignId}`);
-  return { __typename: 'Campaign', ...campaign };
 };

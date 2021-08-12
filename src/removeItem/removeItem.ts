@@ -5,20 +5,20 @@ export const removeItem: MutationResolvers['removeItem'] = async (
   { itemId },
   { prisma },
 ): Promise<RemoveItemResult> => {
-  const { campaign } = await prisma.item.delete({
-    where: { id: itemId },
-    include: { campaign: true },
-  });
+  try {
+    const { campaign } = await prisma.item.delete({
+      where: { id: itemId },
+      include: { campaign: true },
+    });
 
-  if (!campaign) {
+    return {
+      __typename: 'Campaign',
+      ...campaign!,
+    };
+  } catch {
     return {
       __typename: 'ItemNotFound',
       message: `Item with ID ${itemId} does not exist`,
     };
   }
-
-  return {
-    __typename: 'Campaign',
-    ...campaign,
-  };
 };

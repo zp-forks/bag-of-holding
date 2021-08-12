@@ -5,22 +5,22 @@ export const addTag: MutationResolvers['addTag'] = async (
   { itemId, tag },
   { prisma },
 ): Promise<AddTagResult> => {
-  const item = await prisma.item.update({
-    data: { tags: { push: tag } },
-    where: { id: itemId },
-  });
+  try {
+    const item = await prisma.item.update({
+      data: { tags: { push: tag } },
+      where: { id: itemId },
+    });
 
-  if (!item) {
+    logger.info(`Added tag to item ${itemId}`);
+
+    return {
+      __typename: 'Item',
+      ...item,
+    };
+  } catch {
     return {
       __typename: 'ItemNotFound',
       message: `Item with ID ${itemId} not found`,
     };
   }
-
-  logger.info(`Added tag to item ${itemId}`);
-
-  return {
-    __typename: 'Item',
-    ...item,
-  };
 };

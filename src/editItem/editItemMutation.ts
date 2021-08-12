@@ -25,19 +25,19 @@ export const editItem: MutationResolvers['editItem'] = async (
     };
   }
 
-  const item = await prisma.item.update({
-    data: mapToPrisma(input),
-    where: { id: itemId },
-  });
+  try {
+    const item = await prisma.item.update({
+      data: mapToPrisma(input),
+      where: { id: itemId },
+    });
 
-  if (!item) {
+    logger.info(`Updated item with ID ${itemId}`);
+
+    return { __typename: 'Item', ...item };
+  } catch {
     return {
       __typename: 'ItemNotFound',
       message: `Item with ID ${itemId} does not exist`,
     };
   }
-
-  logger.info(`Updated item with ID ${itemId}`);
-
-  return { __typename: 'Item', ...item };
 };
