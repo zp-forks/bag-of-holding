@@ -1,25 +1,17 @@
-import {
-  AddItemInput,
-  AddItemResult,
-  logger,
-  MutationResolvers,
-} from '../shared';
-
-const mapToPrisma = (input: AddItemInput) => ({
-  name: input.name,
-  description: input.description ?? undefined,
-  quantity: input.quantity ?? undefined,
-  notes: input.notes ?? undefined,
-  tags: input.tags ?? undefined,
-});
+import { AddItemResult, logger, MutationResolvers } from '../shared';
 
 export const addItem: MutationResolvers['addItem'] = async (
   _,
-  { campaignId, input },
+  { campaignId, input: { tags, quantity, ...input } },
   { prisma },
 ): Promise<AddItemResult> => {
   const { campaign } = await prisma.item.create({
-    data: { campaignId, ...mapToPrisma(input) },
+    data: {
+      campaignId,
+      ...input,
+      quantity: quantity ?? undefined,
+      tags: tags ?? undefined,
+    },
     include: { campaign: true },
   });
 
