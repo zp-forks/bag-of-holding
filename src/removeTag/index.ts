@@ -1,1 +1,1 @@
-export { removeTagMutation } from './removeTagMutation';
+export { removeTag } from './removeTag';

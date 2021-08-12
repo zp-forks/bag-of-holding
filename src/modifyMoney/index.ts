@@ -1,1 +1,1 @@
-export { modifyMoneyMutation } from './modifyMoneyMutation';
+export { modifyMoney } from './modifyMoney';

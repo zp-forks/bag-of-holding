@@ -1,4 +1,5 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { GQLContext } from '../../typeDefs';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -11,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: Date;
   _FieldSet: any;
 };
 
@@ -28,7 +30,7 @@ export type AddItemInput = {
 
 export type AddItemResult = Campaign | CampaignNotFound;
 
-export type AddTagResult = Campaign | CampaignNotFound | ItemNotFound;
+export type AddTagResult = Item | ItemNotFound;
 
 export type Campaign = {
   __typename: 'Campaign';
@@ -39,8 +41,8 @@ export type Campaign = {
   gold: Scalars['Int'];
   silver: Scalars['Int'];
   copper: Scalars['Int'];
-  items: Array<Item>;
-  createdAt: Scalars['String'];
+  items?: Maybe<Array<Item>>;
+  createdAt: Scalars['Date'];
 };
 
 export type CampaignNotFound = {
@@ -53,8 +55,8 @@ export type CreatedCampaign = {
   id: Scalars['ID'];
 };
 
+
 export type EditItemInput = {
-  id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['Int']>;
@@ -62,7 +64,7 @@ export type EditItemInput = {
   tags?: Maybe<Array<Scalars['String']>>;
 };
 
-export type EditItemResult = Campaign | CampaignNotFound | InvalidInput | ItemNotFound;
+export type EditItemResult = Item | InvalidInput | ItemNotFound;
 
 export type FetchCampaignResult = Campaign | CampaignNotFound;
 
@@ -79,8 +81,8 @@ export type Item = {
   quantity: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
   tags: Array<Scalars['String']>;
-  createdAt: Scalars['String'];
-  updatedAt?: Maybe<Scalars['String']>;
+  createdAt: Scalars['Date'];
+  updatedAt?: Maybe<Scalars['Date']>;
 };
 
 export type ItemNotFound = {
@@ -99,11 +101,6 @@ export type ModifyMoneyInput = {
 
 export type ModifyMoneyResult = Campaign | CampaignNotFound;
 
-export type ModifyTagsInput = {
-  itemId: Scalars['ID'];
-  tag: Scalars['String'];
-};
-
 export enum MoneyModification {
   ADD = 'ADD',
   DEDUCT = 'DEDUCT'
@@ -112,10 +109,10 @@ export enum MoneyModification {
 export type Mutation = {
   __typename: 'Mutation';
   createCampaign: CreatedCampaign;
+  modifyMoney: ModifyMoneyResult;
   addItem: AddItemResult;
   removeItem: RemoveItemResult;
   editItem: EditItemResult;
-  modifyMoney: ModifyMoneyResult;
   addTag: AddTagResult;
   removeTag: RemoveTagResult;
 };
@@ -126,50 +123,49 @@ export type MutationCreateCampaignArgs = {
 };
 
 
+export type MutationModifyMoneyArgs = {
+  campaignId: Scalars['ID'];
+  input: ModifyMoneyInput;
+};
+
+
 export type MutationAddItemArgs = {
-  id: Scalars['ID'];
+  campaignId: Scalars['ID'];
   input: AddItemInput;
 };
 
 
 export type MutationRemoveItemArgs = {
-  id: Scalars['ID'];
-  input: RemoveItemInput;
+  itemId: Scalars['ID'];
 };
 
 
 export type MutationEditItemArgs = {
-  id: Scalars['ID'];
+  itemId: Scalars['ID'];
   input: EditItemInput;
 };
 
 
-export type MutationModifyMoneyArgs = {
-  id: Scalars['ID'];
-  input: ModifyMoneyInput;
-};
-
-
 export type MutationAddTagArgs = {
-  id: Scalars['ID'];
-  input: ModifyTagsInput;
+  itemId: Scalars['ID'];
+  tag: Scalars['String'];
 };
 
 
 export type MutationRemoveTagArgs = {
-  id: Scalars['ID'];
-  input: ModifyTagsInput;
+  itemId: Scalars['ID'];
+  tag: Scalars['String'];
 };
 
 export type Query = {
   __typename: 'Query';
-  listCampaigns: Array<Maybe<Campaign>>;
-  fetchCampaign: FetchCampaignResult;
+  campaigns: Array<Campaign>;
+  campaign: FetchCampaignResult;
 };
 
 
-export type QueryFetchCampaignArgs = {
-  id: Scalars['ID'];
+export type QueryCampaignArgs = {
+  campaignId: Scalars['ID'];
 };
 
 export type RemoveItemInput = {
@@ -177,9 +173,9 @@ export type RemoveItemInput = {
   id: Scalars['ID'];
 };
 
-export type RemoveItemResult = Campaign | CampaignNotFound;
+export type RemoveItemResult = Campaign | ItemNotFound;
 
-export type RemoveTagResult = Campaign | CampaignNotFound | ItemNotFound;
+export type RemoveTagResult = Item | ItemNotFound;
 
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -252,26 +248,26 @@ export type ResolversTypes = ResolversObject<{
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   AddItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
-  AddTagResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'] | ResolversTypes['ItemNotFound'];
+  AddTagResult: ResolversTypes['Item'] | ResolversTypes['ItemNotFound'];
   Campaign: ResolverTypeWrapper<Campaign>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   CampaignNotFound: ResolverTypeWrapper<CampaignNotFound>;
   CreatedCampaign: ResolverTypeWrapper<CreatedCampaign>;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   EditItemInput: EditItemInput;
-  EditItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'] | ResolversTypes['InvalidInput'] | ResolversTypes['ItemNotFound'];
+  EditItemResult: ResolversTypes['Item'] | ResolversTypes['InvalidInput'] | ResolversTypes['ItemNotFound'];
   FetchCampaignResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   InvalidInput: ResolverTypeWrapper<InvalidInput>;
   Item: ResolverTypeWrapper<Item>;
   ItemNotFound: ResolverTypeWrapper<ItemNotFound>;
   ModifyMoneyInput: ModifyMoneyInput;
   ModifyMoneyResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
-  ModifyTagsInput: ModifyTagsInput;
   MoneyModification: MoneyModification;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   RemoveItemInput: RemoveItemInput;
-  RemoveItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
-  RemoveTagResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'] | ResolversTypes['ItemNotFound'];
+  RemoveItemResult: ResolversTypes['Campaign'] | ResolversTypes['ItemNotFound'];
+  RemoveTagResult: ResolversTypes['Item'] | ResolversTypes['ItemNotFound'];
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
@@ -281,37 +277,37 @@ export type ResolversParentTypes = ResolversObject<{
   String: Scalars['String'];
   Int: Scalars['Int'];
   AddItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
-  AddTagResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'] | ResolversParentTypes['ItemNotFound'];
+  AddTagResult: ResolversParentTypes['Item'] | ResolversParentTypes['ItemNotFound'];
   Campaign: Campaign;
   ID: Scalars['ID'];
   CampaignNotFound: CampaignNotFound;
   CreatedCampaign: CreatedCampaign;
+  Date: Scalars['Date'];
   EditItemInput: EditItemInput;
-  EditItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'] | ResolversParentTypes['InvalidInput'] | ResolversParentTypes['ItemNotFound'];
+  EditItemResult: ResolversParentTypes['Item'] | ResolversParentTypes['InvalidInput'] | ResolversParentTypes['ItemNotFound'];
   FetchCampaignResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   InvalidInput: InvalidInput;
   Item: Item;
   ItemNotFound: ItemNotFound;
   ModifyMoneyInput: ModifyMoneyInput;
   ModifyMoneyResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
-  ModifyTagsInput: ModifyTagsInput;
   Mutation: {};
   Query: {};
   RemoveItemInput: RemoveItemInput;
-  RemoveItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
-  RemoveTagResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'] | ResolversParentTypes['ItemNotFound'];
+  RemoveItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['ItemNotFound'];
+  RemoveTagResult: ResolversParentTypes['Item'] | ResolversParentTypes['ItemNotFound'];
   Boolean: Scalars['Boolean'];
 }>;
 
-export type AddItemResultResolvers<ContextType = any, ParentType = ResolversParentTypes['AddItemResult']> = ResolversObject<{
+export type AddItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['AddItemResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
 
-export type AddTagResultResolvers<ContextType = any, ParentType = ResolversParentTypes['AddTagResult']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound' | 'ItemNotFound', ParentType, ContextType>;
+export type AddTagResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['AddTagResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Item' | 'ItemNotFound', ParentType, ContextType>;
 }>;
 
-export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTypes['Campaign']> = ResolversObject<{
+export type CampaignResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Campaign']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   electrum?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -319,84 +315,89 @@ export type CampaignResolvers<ContextType = any, ParentType = ResolversParentTyp
   gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  items?: Resolver<Maybe<Array<ResolversTypes['Item']>>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type CampaignNotFoundResolvers<ContextType = any, ParentType = ResolversParentTypes['CampaignNotFound']> = ResolversObject<{
+export type CampaignNotFoundResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['CampaignNotFound']> = ResolversObject<{
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type CreatedCampaignResolvers<ContextType = any, ParentType = ResolversParentTypes['CreatedCampaign']> = ResolversObject<{
+export type CreatedCampaignResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['CreatedCampaign']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type EditItemResultResolvers<ContextType = any, ParentType = ResolversParentTypes['EditItemResult']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound' | 'InvalidInput' | 'ItemNotFound', ParentType, ContextType>;
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+  name: 'Date';
+}
+
+export type EditItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['EditItemResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Item' | 'InvalidInput' | 'ItemNotFound', ParentType, ContextType>;
 }>;
 
-export type FetchCampaignResultResolvers<ContextType = any, ParentType = ResolversParentTypes['FetchCampaignResult']> = ResolversObject<{
+export type FetchCampaignResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['FetchCampaignResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
 
-export type InvalidInputResolvers<ContextType = any, ParentType = ResolversParentTypes['InvalidInput']> = ResolversObject<{
+export type InvalidInputResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['InvalidInput']> = ResolversObject<{
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ItemResolvers<ContextType = any, ParentType = ResolversParentTypes['Item']> = ResolversObject<{
+export type ItemResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Item']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   quantity?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ItemNotFoundResolvers<ContextType = any, ParentType = ResolversParentTypes['ItemNotFound']> = ResolversObject<{
+export type ItemNotFoundResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['ItemNotFound']> = ResolversObject<{
   message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ModifyMoneyResultResolvers<ContextType = any, ParentType = ResolversParentTypes['ModifyMoneyResult']> = ResolversObject<{
+export type ModifyMoneyResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['ModifyMoneyResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
 
-export type MutationResolvers<ContextType = any, ParentType = ResolversParentTypes['Mutation']> = ResolversObject<{
+export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Mutation']> = ResolversObject<{
   createCampaign?: Resolver<ResolversTypes['CreatedCampaign'], ParentType, ContextType, RequireFields<MutationCreateCampaignArgs, 'name'>>;
-  addItem?: Resolver<ResolversTypes['AddItemResult'], ParentType, ContextType, RequireFields<MutationAddItemArgs, 'id' | 'input'>>;
-  removeItem?: Resolver<ResolversTypes['RemoveItemResult'], ParentType, ContextType, RequireFields<MutationRemoveItemArgs, 'id' | 'input'>>;
-  editItem?: Resolver<ResolversTypes['EditItemResult'], ParentType, ContextType, RequireFields<MutationEditItemArgs, 'id' | 'input'>>;
-  modifyMoney?: Resolver<ResolversTypes['ModifyMoneyResult'], ParentType, ContextType, RequireFields<MutationModifyMoneyArgs, 'id' | 'input'>>;
-  addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'id' | 'input'>>;
-  removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'id' | 'input'>>;
+  modifyMoney?: Resolver<ResolversTypes['ModifyMoneyResult'], ParentType, ContextType, RequireFields<MutationModifyMoneyArgs, 'campaignId' | 'input'>>;
+  addItem?: Resolver<ResolversTypes['AddItemResult'], ParentType, ContextType, RequireFields<MutationAddItemArgs, 'campaignId' | 'input'>>;
+  removeItem?: Resolver<ResolversTypes['RemoveItemResult'], ParentType, ContextType, RequireFields<MutationRemoveItemArgs, 'itemId'>>;
+  editItem?: Resolver<ResolversTypes['EditItemResult'], ParentType, ContextType, RequireFields<MutationEditItemArgs, 'itemId' | 'input'>>;
+  addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'itemId' | 'tag'>>;
+  removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'itemId' | 'tag'>>;
 }>;
 
-export type QueryResolvers<ContextType = any, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
-  listCampaigns?: Resolver<Array<Maybe<ResolversTypes['Campaign']>>, ParentType, ContextType>;
-  fetchCampaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryFetchCampaignArgs, 'id'>>;
+export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
+  campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
+  campaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryCampaignArgs, 'campaignId'>>;
 }>;
 
-export type RemoveItemResultResolvers<ContextType = any, ParentType = ResolversParentTypes['RemoveItemResult']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
+export type RemoveItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveItemResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Campaign' | 'ItemNotFound', ParentType, ContextType>;
 }>;
 
-export type RemoveTagResultResolvers<ContextType = any, ParentType = ResolversParentTypes['RemoveTagResult']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound' | 'ItemNotFound', ParentType, ContextType>;
+export type RemoveTagResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveTagResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Item' | 'ItemNotFound', ParentType, ContextType>;
 }>;
 
-export type Resolvers<ContextType = any> = ResolversObject<{
+export type Resolvers<ContextType = GQLContext> = ResolversObject<{
   AddItemResult?: AddItemResultResolvers<ContextType>;
   AddTagResult?: AddTagResultResolvers<ContextType>;
   Campaign?: CampaignResolvers<ContextType>;
   CampaignNotFound?: CampaignNotFoundResolvers<ContextType>;
   CreatedCampaign?: CreatedCampaignResolvers<ContextType>;
+  Date?: GraphQLScalarType;
   EditItemResult?: EditItemResultResolvers<ContextType>;
   FetchCampaignResult?: FetchCampaignResultResolvers<ContextType>;
   InvalidInput?: InvalidInputResolvers<ContextType>;
@@ -414,4 +415,4 @@ export type Resolvers<ContextType = any> = ResolversObject<{
  * @deprecated
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
-export type IResolvers<ContextType = any> = Resolvers<ContextType>;
+export type IResolvers<ContextType = GQLContext> = Resolvers<ContextType>;

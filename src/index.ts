@@ -1,6 +1,6 @@
+import { PrismaClient } from '@prisma/client';
 import { ApolloServer, makeExecutableSchema } from 'apollo-server';
 import { config } from 'dotenv';
-import mongoose from 'mongoose';
 import { resolvers } from './resolvers';
 import { logger } from './shared';
 import { typeDefs } from './typeDefs';
@@ -13,23 +13,17 @@ const schema = makeExecutableSchema({
   resolverValidationOptions: { requireResolversForResolveType: false },
 });
 
-mongoose
-  .connect(process.env.DATABASE_CONNECTION_STRING ?? '', {
-    auth: {
-      user: process.env.DATABASE_USER ?? '',
-      password: process.env.DATABASE_PASSWORD ?? '',
-    },
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    logger.info('Connected to database');
-  });
+const prisma = new PrismaClient();
+
+prisma.$connect().then(() => {
+  logger.debug('Connected to database');
+});
 
 const server = new ApolloServer({
   schema,
   playground: true,
   introspection: true,
+  context: { prisma },
 });
 
 server

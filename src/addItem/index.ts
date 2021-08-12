@@ -1,1 +1,1 @@
-export { addItemMutation } from './addItemMutation';
+export { addItemMutation as addItem } from './addItem';
