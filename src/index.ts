@@ -15,10 +15,6 @@ const schema = makeExecutableSchema({
 
 const prisma = new PrismaClient();
 
-prisma.$connect().then(() => {
-  logger.debug('Connected to database');
-});
-
 const server = new ApolloServer({
   schema,
   playground: true,
