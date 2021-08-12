@@ -1,24 +1,11 @@
-import {
-  EditItemInput,
-  EditItemResult,
-  logger,
-  MutationResolvers,
-} from '../shared';
-
-const mapToPrisma = (input: EditItemInput) => ({
-  name: input.name ?? undefined,
-  description: input.description ?? undefined,
-  quantity: input.quantity ?? undefined,
-  notes: input.notes ?? undefined,
-  tags: input.tags ?? undefined,
-});
+import { EditItemResult, logger, MutationResolvers } from '../shared';
 
 export const editItem: MutationResolvers['editItem'] = async (
   _,
-  { itemId, input },
+  { itemId, input: { quantity, tags, name, ...input } },
   { prisma },
 ): Promise<EditItemResult> => {
-  if (input.quantity && input.quantity < 0) {
+  if (quantity && quantity < 0) {
     return {
       __typename: 'InvalidInput',
       message: 'Quantity must be 0 or higher',
@@ -27,7 +14,12 @@ export const editItem: MutationResolvers['editItem'] = async (
 
   try {
     const item = await prisma.item.update({
-      data: mapToPrisma(input),
+      data: {
+        ...input,
+        name: name ?? undefined,
+        tags: tags ?? undefined,
+        updatedAt: new Date(),
+      },
       where: { id: itemId },
     });
 

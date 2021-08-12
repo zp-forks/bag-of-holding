@@ -1,1 +1,1 @@
-export { editItem } from './editItemMutation';
+export { editItem } from './editItem';
