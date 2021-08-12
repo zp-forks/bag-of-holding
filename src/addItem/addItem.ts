@@ -13,7 +13,7 @@ const mapToPrisma = (input: AddItemInput) => ({
   tags: input.tags ?? undefined,
 });
 
-export const addItemMutation: MutationResolvers['addItem'] = async (
+export const addItem: MutationResolvers['addItem'] = async (
   _,
   { campaignId, input },
   { prisma },
