@@ -12,9 +12,10 @@ generates:
       nonOptionalTypename: true
       avoidOptionals: false
       showUnusedMappers: true
+      contextType: ../../typeDefs#GQLContext
       namingConvention:
         typeNames: change-case#pascalCase
         enumValues: change-case#upperCase
       scalars:
-        Long: number
+        Date: Date
       allowParentTypeOverride: true

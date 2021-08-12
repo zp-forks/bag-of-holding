@@ -1,1 +1,1 @@
-export { addTagMutation } from './addTagMutation';
+export { addTag } from './addTag';

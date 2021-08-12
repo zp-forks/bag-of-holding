@@ -1,1 +1,1 @@
-export { createCampaignMutation } from './createCampaignMutation';
+export { createCampaign } from './createCampaign';

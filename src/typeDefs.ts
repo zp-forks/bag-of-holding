@@ -1,6 +1,17 @@
+import { Prisma, PrismaClient } from '@prisma/client';
 import { gql } from 'apollo-server';
 
+export type GQLContext = {
+  prisma: PrismaClient<
+    Prisma.PrismaClientOptions,
+    never,
+    Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
+  >;
+};
+
 export const typeDefs = gql`
+  scalar Date
+
   type CreatedCampaign {
     id: ID!
   }
@@ -12,8 +23,8 @@ export const typeDefs = gql`
     quantity: Int!
     notes: String
     tags: [String!]!
-    createdAt: String!
-    updatedAt: String
+    createdAt: Date!
+    updatedAt: Date
   }
 
   type Campaign {
@@ -24,8 +35,8 @@ export const typeDefs = gql`
     gold: Int!
     silver: Int!
     copper: Int!
-    items: [Item!]!
-    createdAt: String!
+    items: [Item!]
+    createdAt: Date!
   }
 
   type CampaignNotFound {
@@ -54,7 +65,6 @@ export const typeDefs = gql`
   }
 
   input EditItemInput {
-    id: ID!
     name: String
     description: String
     quantity: Int
@@ -78,35 +88,28 @@ export const typeDefs = gql`
     copper: Int!
   }
 
-  input ModifyTagsInput {
-    itemId: ID!
-    tag: String!
-  }
-
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
-  union EditItemResult =
-      Campaign
-    | CampaignNotFound
-    | InvalidInput
-    | ItemNotFound
-  union RemoveItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
-  union AddTagResult = Campaign | CampaignNotFound | ItemNotFound
-  union RemoveTagResult = Campaign | CampaignNotFound | ItemNotFound
+  union RemoveItemResult = Campaign | ItemNotFound
+
+  union EditItemResult = Item | InvalidInput | ItemNotFound
+  union AddTagResult = Item | ItemNotFound
+  union RemoveTagResult = Item | ItemNotFound
 
   type Query {
-    listCampaigns: [Campaign]!
-    fetchCampaign(id: ID!): FetchCampaignResult!
+    campaigns: [Campaign!]!
+    campaign(campaignId: ID!): FetchCampaignResult!
   }
 
   type Mutation {
     createCampaign(name: String!): CreatedCampaign!
-    addItem(id: ID!, input: AddItemInput!): AddItemResult!
-    removeItem(id: ID!, input: RemoveItemInput!): RemoveItemResult!
-    editItem(id: ID!, input: EditItemInput!): EditItemResult!
-    modifyMoney(id: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
-    addTag(id: ID!, input: ModifyTagsInput!): AddTagResult!
-    removeTag(id: ID!, input: ModifyTagsInput!): RemoveTagResult!
+    modifyMoney(campaignId: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
+    addItem(campaignId: ID!, input: AddItemInput!): AddItemResult!
+    removeItem(itemId: ID!): RemoveItemResult!
+
+    editItem(itemId: ID!, input: EditItemInput!): EditItemResult!
+    addTag(itemId: ID!, tag: String!): AddTagResult!
+    removeTag(itemId: ID!, tag: String!): RemoveTagResult!
   }
 `;

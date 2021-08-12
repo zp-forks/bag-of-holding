@@ -1,1 +1,0 @@
-export { listCampaignsQuery } from './listCampaignsQuery';

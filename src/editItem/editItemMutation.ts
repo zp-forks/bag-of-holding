@@ -1,47 +1,43 @@
 import {
-  Campaign,
-  CampaignNotFound,
-  getCampaignById,
-  InvalidInput,
-  ItemNotFound,
+  EditItemInput,
+  EditItemResult,
   logger,
-  mapDatabaseModelToGql,
   MutationResolvers,
 } from '../shared';
-import { modifyItem } from './item';
 
-export const editItemMutation: MutationResolvers['editItem'] = async (
+const mapToPrisma = (input: EditItemInput) => ({
+  name: input.name ?? undefined,
+  description: input.description ?? undefined,
+  quantity: input.quantity ?? undefined,
+  notes: input.notes ?? undefined,
+  tags: input.tags ?? undefined,
+});
+
+export const editItem: MutationResolvers['editItem'] = async (
   _,
-  { id, input },
-): Promise<Campaign | CampaignNotFound | InvalidInput | ItemNotFound> => {
-  logger.info(`Updating item: ${input.id} from campaign ${id}`);
-
+  { itemId, input },
+  { prisma },
+): Promise<EditItemResult> => {
   if (input.quantity && input.quantity < 0) {
     return {
       __typename: 'InvalidInput',
-      message: 'Quantity cannot be below 0',
+      message: 'Quantity must be 0 or higher',
     };
   }
 
-  const savedCampaign = await getCampaignById(id);
-
-  if (!savedCampaign) {
-    return {
-      __typename: 'CampaignNotFound',
-      message: `No campaign with ID ${id}`,
-    };
-  }
-
-  const item = modifyItem(savedCampaign.items, input);
+  const item = await prisma.item.update({
+    data: mapToPrisma(input),
+    where: { id: itemId },
+  });
 
   if (!item) {
     return {
       __typename: 'ItemNotFound',
-      message: `No item found with ID ${input.id}`,
+      message: `Item with ID ${itemId} does not exist`,
     };
   }
 
-  savedCampaign.save();
+  logger.info(`Updated item with ID ${itemId}`);
 
-  return mapDatabaseModelToGql(savedCampaign);
+  return { __typename: 'Item', ...item };
 };

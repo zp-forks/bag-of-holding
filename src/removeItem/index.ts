@@ -1,1 +1,1 @@
-export { removeItemMutation } from './removeItemMutation';
+export { removeItem } from './removeItem';
