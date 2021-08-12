@@ -18,12 +18,12 @@ export const addItemMutation: MutationResolvers['addItem'] = async (
   { campaignId, input },
   { prisma },
 ): Promise<AddItemResult> => {
-  const updatedCampaign = await prisma.campaign.update({
-    data: { items: { create: mapToPrisma(input) } },
-    where: { id: campaignId },
+  const { campaign } = await prisma.item.create({
+    data: { campaignId, ...mapToPrisma(input) },
+    include: { campaign: true },
   });
 
-  if (!updatedCampaign) {
+  if (!campaign) {
     return {
       __typename: 'CampaignNotFound',
       message: `Campaign with ID ${campaignId} does not exist`,
@@ -34,6 +34,6 @@ export const addItemMutation: MutationResolvers['addItem'] = async (
 
   return {
     __typename: 'Campaign',
-    ...updatedCampaign,
+    ...campaign,
   };
 };
