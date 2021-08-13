@@ -9,8 +9,7 @@ import { items } from './items';
 import { modifyMoney } from './modifyMoney';
 import { removeItem } from './removeItem';
 import { removeTag } from './removeTag';
-import { Resolvers } from './shared';
-import { dateScalar } from './shared/dateScalar';
+import { dateScalar, Resolvers } from './shared';
 
 export const resolvers: Resolvers = {
   Campaign: { items },

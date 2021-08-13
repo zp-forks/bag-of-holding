@@ -18,7 +18,7 @@ export const removeItem: MutationResolvers['removeItem'] = async (
   } catch {
     return {
       __typename: 'ItemNotFound',
-      message: `Item with ID ${itemId} does not exist`,
+      message: `Item with ID ${itemId} not found`,
     };
   }
 };
