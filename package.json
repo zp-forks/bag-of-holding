@@ -11,6 +11,7 @@
     "apollo-server": "^2.25.2",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
+    "mongoose": "^5.13.7",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -57,6 +58,7 @@
     "prettier": "prettier --write .",
     "gql:gen": "graphql-codegen --config codegen-server.yml",
     "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy"
+    "db:deploy": "prisma migrate deploy",
+    "migrate": "ts-node src/db-migrate"
   }
 }
