@@ -20,7 +20,7 @@ export const fetchCampaign: QueryResolvers['campaign'] = async (
   } catch {
     return {
       __typename: 'CampaignNotFound',
-      message: `Campaign with ID ${campaignId} does not exist`,
+      message: `Campaign with ID ${campaignId} not found`,
     };
   }
 };

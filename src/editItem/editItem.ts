@@ -19,7 +19,7 @@ export const editItem: MutationResolvers['editItem'] = async (
         quantity: quantity ?? undefined,
         name: name ?? undefined,
         tags: tags ?? undefined,
-        updatedAt: new Date(),
+        updatedAt: new Date(Date.now()),
       },
       where: { id: itemId },
     });
@@ -30,7 +30,7 @@ export const editItem: MutationResolvers['editItem'] = async (
   } catch {
     return {
       __typename: 'ItemNotFound',
-      message: `Item with ID ${itemId} does not exist`,
+      message: `Item with ID ${itemId} not found`,
     };
   }
 };
