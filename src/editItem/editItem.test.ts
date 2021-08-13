@@ -35,12 +35,12 @@ describe('editItem', () => {
     });
   });
 
-  it('ensures quantity and tags will not be set to null when not provided', async () => {
+  it('ensures quantity, tags and name will not be set to null when not provided', async () => {
     await editItem!(
       {},
       {
         itemId: 'item-id',
-        input: { name: 'new item' },
+        input: {},
       },
       { prisma },
       resolveInfo,
@@ -48,7 +48,30 @@ describe('editItem', () => {
 
     expect(update).toHaveBeenCalledWith({
       data: {
-        name: 'new item',
+        name: undefined,
+        quantity: undefined,
+        tags: undefined,
+        updatedAt: new Date(1),
+      },
+      where: { id: 'item-id' },
+    });
+  });
+
+  it('can set values to null', async () => {
+    await editItem!(
+      {},
+      {
+        itemId: 'item-id',
+        input: { description: null },
+      },
+      { prisma },
+      resolveInfo,
+    );
+
+    expect(update).toHaveBeenCalledWith({
+      data: {
+        description: null,
+        name: undefined,
         quantity: undefined,
         tags: undefined,
         updatedAt: new Date(1),
@@ -73,6 +96,23 @@ describe('editItem', () => {
     expect(result).toStrictEqual({
       __typename: 'ItemNotFound',
       message: 'Item with ID item-id not found',
+    });
+  });
+
+  it('returns invalid input when quantity is less than 0', async () => {
+    const result = await editItem!(
+      {},
+      {
+        itemId: 'item-id',
+        input: { name: 'new item', quantity: -1 },
+      },
+      { prisma },
+      resolveInfo,
+    );
+
+    expect(result).toStrictEqual({
+      __typename: 'InvalidInput',
+      message: 'Quantity must be 0 or higher',
     });
   });
 
