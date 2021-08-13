@@ -11,7 +11,6 @@
     "apollo-server": "^2.25.2",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
-    "mongoose": "^5.13.7",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -31,6 +30,7 @@
     "eslint-plugin-jest": "^24.3.6",
     "husky": "^7.0.1",
     "jest": "^27.0.6",
+    "mongoose": "^5.13.7",
     "nodemon": "^2.0.9",
     "prettier": "^2.3.2",
     "prisma": "^2.29.0",
@@ -59,6 +59,7 @@
     "gql:gen": "graphql-codegen --config codegen-server.yml",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
-    "migrate": "ts-node src/db-migrate"
+    "migrate": "ts-node scripts/db-migrate",
+    "wipe": "ts-node scripts/delete"
   }
 }
