@@ -4,6 +4,7 @@ const update = jest.fn();
 
 const prisma = {
   item: {
+    findUnique: jest.fn(),
     update,
   },
 } as any;
@@ -12,6 +13,7 @@ const resolveInfo: any = {};
 
 describe('addTag', () => {
   it('calls update with correct values', async () => {
+    prisma.item.findUnique.mockReturnValue({ tags: [] });
     await addTag!(
       {},
       {
@@ -23,7 +25,26 @@ describe('addTag', () => {
     );
 
     expect(update).toHaveBeenCalledWith({
-      data: { tags: { push: 'tag' } },
+      data: { tags: { set: ['tag'] } },
+      where: { id: 'item-id' },
+    });
+  });
+
+  it('does not duplicate tags', async () => {
+    prisma.item.findUnique.mockReturnValue({ tags: ['tag', 'tag-2'] });
+
+    await addTag!(
+      {},
+      {
+        itemId: 'item-id',
+        tag: 'tag-2',
+      },
+      { prisma },
+      resolveInfo,
+    );
+
+    expect(update).toHaveBeenCalledWith({
+      data: { tags: { set: ['tag', 'tag-2'] } },
       where: { id: 'item-id' },
     });
   });

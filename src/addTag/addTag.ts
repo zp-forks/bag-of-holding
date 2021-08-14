@@ -6,8 +6,19 @@ export const addTag: MutationResolvers['addTag'] = async (
   { prisma },
 ): Promise<AddTagResult> => {
   try {
-    const item = await prisma.item.update({
-      data: { tags: { push: tag } },
+    const item = await prisma.item.findUnique({
+      where: {
+        id: itemId,
+      },
+      rejectOnNotFound: true,
+    });
+
+    const tagSet = new Set(item.tags);
+
+    tagSet.add(tag);
+
+    const savedItem = await prisma.item.update({
+      data: { tags: { set: [...tagSet] } },
       where: { id: itemId },
     });
 
@@ -15,7 +26,7 @@ export const addTag: MutationResolvers['addTag'] = async (
 
     return {
       __typename: 'Item',
-      ...item,
+      ...savedItem,
     };
   } catch {
     return {
