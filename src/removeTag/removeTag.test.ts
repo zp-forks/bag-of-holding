@@ -11,7 +11,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
-const context = { prisma, accessToken: '123' };
+const context = { prisma, userId: '123' };
 
 Date.now = jest.fn().mockReturnValue(1);
 

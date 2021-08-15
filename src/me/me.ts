@@ -1,10 +1,6 @@
 import { logger, QueryResolvers } from 'shared';
 
-export const me: QueryResolvers['me'] = async (
-  _,
-  __,
-  { prisma, accessToken: userId },
-) => {
+export const me: QueryResolvers['me'] = async (_, __, { prisma, userId }) => {
   const user = await prisma.user.findUnique({
     where: {
       id: userId,

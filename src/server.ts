@@ -10,7 +10,7 @@ const schema = makeExecutableSchema({
   resolverValidationOptions: { requireResolversForResolveType: false },
 });
 
-const extractAccessToken = (headers: IncomingHttpHeaders) => {
+const extractUserId = (headers: IncomingHttpHeaders) => {
   const header = headers['bag-access-token'];
   return header || '';
 };
@@ -20,7 +20,7 @@ export const server = new ApolloServer({
   playground: true,
   introspection: true,
   context: ({ req }) => {
-    const accessToken = extractAccessToken(req.headers);
-    return { prisma: new PrismaClient(), accessToken };
+    const userId = extractUserId(req.headers);
+    return { prisma: new PrismaClient(), userId };
   },
 });
