@@ -1,5 +1,5 @@
 import { Campaign as PCampaign } from '@prisma/client';
-import { Campaign, logger, QueryResolvers } from '../shared';
+import { Campaign, logger, QueryResolvers } from 'shared';
 
 const toGql = (campaign: PCampaign): Campaign => ({
   __typename: 'Campaign',

@@ -1,4 +1,4 @@
-import { MutationResolvers } from '../shared';
+import { MutationResolvers } from 'shared';
 
 export const login: MutationResolvers['login'] = async (
   _,

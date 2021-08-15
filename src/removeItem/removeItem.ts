@@ -1,4 +1,4 @@
-import { MutationResolvers, RemoveItemResult } from '../shared';
+import { MutationResolvers, RemoveItemResult } from 'shared';
 
 export const removeItem: MutationResolvers['removeItem'] = async (
   _,

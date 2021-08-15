@@ -1,4 +1,4 @@
-import { AddTagResult, logger, MutationResolvers } from '../shared';
+import { AddTagResult, logger, MutationResolvers } from 'shared';
 
 export const addTag: MutationResolvers['addTag'] = async (
   _,
