@@ -191,11 +191,6 @@ export type QueryItemArgs = {
   itemId: Scalars['ID'];
 };
 
-
-export type QueryMeArgs = {
-  userId: Scalars['ID'];
-};
-
 export type RemoveItemInput = {
   /** ID of the item to be removed */
   id: Scalars['ID'];
@@ -444,7 +439,7 @@ export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParen
   campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
   campaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryCampaignArgs, 'campaignId'>>;
   item?: Resolver<Maybe<ResolversTypes['FetchItemResult']>, ParentType, ContextType, RequireFields<QueryItemArgs, 'itemId'>>;
-  me?: Resolver<Maybe<ResolversTypes['MeResult']>, ParentType, ContextType, RequireFields<QueryMeArgs, 'userId'>>;
+  me?: Resolver<Maybe<ResolversTypes['MeResult']>, ParentType, ContextType>;
 }>;
 
 export type RemoveItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveItemResult']> = ResolversObject<{
