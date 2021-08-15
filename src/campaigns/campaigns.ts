@@ -11,7 +11,7 @@ export const listCampaigns: QueryResolvers['campaigns'] = async (
   _,
   __,
   { prisma },
-): Promise<Campaign[]> => {
+) => {
   const campaigns = await prisma.campaign.findMany();
 
   logger.info('Listing all campaigns');

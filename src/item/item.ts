@@ -1,10 +1,10 @@
-import { FetchItemResult, logger, QueryResolvers } from 'shared';
+import { logger, QueryResolvers } from 'shared';
 
 export const fetchItem: QueryResolvers['item'] = async (
   _,
   { itemId },
   { prisma },
-): Promise<FetchItemResult> => {
+) => {
   try {
     const item = await prisma.item.findUnique({
       where: { id: itemId },

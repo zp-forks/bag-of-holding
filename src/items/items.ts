@@ -10,7 +10,7 @@ export const listItems: CampaignResolvers['items'] = async (
   { id: campaignId },
   _,
   { prisma },
-): Promise<Item[]> => {
+) => {
   const items = await prisma.item.findMany({ where: { campaignId } });
 
   logger.info(`Listing all items for campaign ${campaignId}`);
