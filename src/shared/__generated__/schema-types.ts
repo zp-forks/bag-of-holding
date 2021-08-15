@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { GQLContext } from '../../typeDefs';
+import { GQLContext } from 'typeDefs';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -33,7 +33,7 @@ export type AddItemResult = Campaign | CampaignNotFound;
 export type AddTagResult = Item | ItemNotFound;
 
 export type Campaign = {
-  __typename?: 'Campaign';
+  __typename: 'Campaign';
   id: Scalars['ID'];
   name: Scalars['String'];
   electrum: Scalars['Int'];
@@ -46,12 +46,12 @@ export type Campaign = {
 };
 
 export type CampaignNotFound = {
-  __typename?: 'CampaignNotFound';
+  __typename: 'CampaignNotFound';
   message: Scalars['String'];
 };
 
 export type CreatedCampaign = {
-  __typename?: 'CreatedCampaign';
+  __typename: 'CreatedCampaign';
   id: Scalars['ID'];
 };
 
@@ -71,12 +71,12 @@ export type FetchCampaignResult = Campaign | CampaignNotFound;
 export type FetchItemResult = Item | ItemNotFound;
 
 export type InvalidInput = {
-  __typename?: 'InvalidInput';
+  __typename: 'InvalidInput';
   message: Scalars['String'];
 };
 
 export type Item = {
-  __typename?: 'Item';
+  __typename: 'Item';
   id: Scalars['ID'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
@@ -88,7 +88,7 @@ export type Item = {
 };
 
 export type ItemNotFound = {
-  __typename?: 'ItemNotFound';
+  __typename: 'ItemNotFound';
   message: Scalars['String'];
 };
 
@@ -117,7 +117,7 @@ export enum MoneyModification {
 }
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename: 'Mutation';
   createCampaign: CreatedCampaign;
   modifyMoney: ModifyMoneyResult;
   addItem: AddItemResult;
@@ -174,7 +174,7 @@ export type MutationLoginArgs = {
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename: 'Query';
   campaigns: Array<Campaign>;
   campaign: FetchCampaignResult;
   item?: Maybe<FetchItemResult>;

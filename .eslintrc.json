@@ -16,6 +16,13 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "jest"],
+
+  "settings": {
+    "import/resolver": {
+      "typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+    }
+  },
+
   "rules": {
     "linebreak-style": "off",
     "object-curly-newline": "off",

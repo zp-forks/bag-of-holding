@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { ApolloServer, makeExecutableSchema } from 'apollo-server';
-import { resolvers } from './resolvers';
-import { typeDefs } from './typeDefs';
+import { resolvers } from 'resolvers';
+import { typeDefs } from 'typeDefs';
 
 const schema = makeExecutableSchema({
   typeDefs,
