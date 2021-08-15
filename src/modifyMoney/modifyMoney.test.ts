@@ -96,7 +96,11 @@ describe('modifyMoney', () => {
       resolveInfo,
     );
 
-    expect(result).toStrictEqual({ __typename: 'Campaign', name: 'name' });
+    expect(result).toStrictEqual({
+      __typename: 'Campaign',
+      name: 'name',
+      items: [],
+    });
   });
 
   it('returns campaign not found when db call throws', async () => {

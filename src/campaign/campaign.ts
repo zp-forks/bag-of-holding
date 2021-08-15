@@ -16,6 +16,7 @@ export const fetchCampaign: QueryResolvers['campaign'] = async (
     return {
       __typename: 'Campaign',
       ...campaign,
+      items: [],
     };
   } catch {
     return {

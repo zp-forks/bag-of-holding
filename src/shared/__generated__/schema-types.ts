@@ -33,7 +33,7 @@ export type AddItemResult = Campaign | CampaignNotFound;
 export type AddTagResult = Item | ItemNotFound;
 
 export type Campaign = {
-  __typename: 'Campaign';
+  __typename?: 'Campaign';
   id: Scalars['ID'];
   name: Scalars['String'];
   electrum: Scalars['Int'];
@@ -41,17 +41,17 @@ export type Campaign = {
   gold: Scalars['Int'];
   silver: Scalars['Int'];
   copper: Scalars['Int'];
-  items?: Maybe<Array<Item>>;
+  items: Array<Item>;
   createdAt: Scalars['Date'];
 };
 
 export type CampaignNotFound = {
-  __typename: 'CampaignNotFound';
+  __typename?: 'CampaignNotFound';
   message: Scalars['String'];
 };
 
 export type CreatedCampaign = {
-  __typename: 'CreatedCampaign';
+  __typename?: 'CreatedCampaign';
   id: Scalars['ID'];
 };
 
@@ -71,12 +71,12 @@ export type FetchCampaignResult = Campaign | CampaignNotFound;
 export type FetchItemResult = Item | ItemNotFound;
 
 export type InvalidInput = {
-  __typename: 'InvalidInput';
+  __typename?: 'InvalidInput';
   message: Scalars['String'];
 };
 
 export type Item = {
-  __typename: 'Item';
+  __typename?: 'Item';
   id: Scalars['ID'];
   name: Scalars['String'];
   description?: Maybe<Scalars['String']>;
@@ -88,7 +88,7 @@ export type Item = {
 };
 
 export type ItemNotFound = {
-  __typename: 'ItemNotFound';
+  __typename?: 'ItemNotFound';
   message: Scalars['String'];
 };
 
@@ -117,7 +117,7 @@ export enum MoneyModification {
 }
 
 export type Mutation = {
-  __typename: 'Mutation';
+  __typename?: 'Mutation';
   createCampaign: CreatedCampaign;
   modifyMoney: ModifyMoneyResult;
   addItem: AddItemResult;
@@ -174,7 +174,7 @@ export type MutationLoginArgs = {
 };
 
 export type Query = {
-  __typename: 'Query';
+  __typename?: 'Query';
   campaigns: Array<Campaign>;
   campaign: FetchCampaignResult;
   item?: Maybe<FetchItemResult>;
@@ -368,7 +368,7 @@ export type CampaignResolvers<ContextType = GQLContext, ParentType = ResolversPa
   gold?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   silver?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  items?: Resolver<Maybe<Array<ResolversTypes['Item']>>, ParentType, ContextType>;
+  items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

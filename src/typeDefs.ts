@@ -35,7 +35,7 @@ export const typeDefs = gql`
     gold: Int!
     silver: Int!
     copper: Int!
-    items: [Item!]
+    items: [Item!]!
     createdAt: Date!
   }
 
