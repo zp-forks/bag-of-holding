@@ -1,15 +1,19 @@
-import { logger, UserResolvers } from '../shared';
+import { Campaign, logger, UserResolvers } from 'shared';
 
 export const userCampaigns: UserResolvers['campaigns'] = async (
   { id },
   _,
   { prisma },
-) => {
+): Promise<Campaign[]> => {
   const campaigns = await prisma.campaign.findMany({
     where: { users: { some: { id } } },
   });
 
   logger.info(`Listing all campaigns for user ${id}`);
 
-  return campaigns.map((campaign) => ({ ...campaign, __typename: 'Campaign' }));
+  return campaigns.map((campaign) => ({
+    ...campaign,
+    __typename: 'Campaign',
+    items: [],
+  }));
 };
