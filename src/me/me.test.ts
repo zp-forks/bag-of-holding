@@ -41,6 +41,7 @@ describe('me', () => {
     expect(result).toStrictEqual({
       __typename: 'User',
       email: 'email',
+      campaigns: [],
     });
   });
 

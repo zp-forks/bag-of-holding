@@ -17,5 +17,6 @@ export const me: QueryResolvers['me'] = async (_, { userId }, { prisma }) => {
   return {
     ...user,
     __typename: 'User',
+    campaigns: [],
   };
 };

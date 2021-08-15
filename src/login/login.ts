@@ -20,5 +20,6 @@ export const login: MutationResolvers['login'] = async (
   return {
     ...user,
     __typename: 'User',
+    campaigns: [],
   };
 };
