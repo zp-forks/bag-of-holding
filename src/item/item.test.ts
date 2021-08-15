@@ -9,6 +9,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 describe('item', () => {
   it('calls find unique with correct values', async () => {
@@ -17,7 +18,7 @@ describe('item', () => {
       {
         itemId: 'item-id',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -35,7 +36,7 @@ describe('item', () => {
       {
         itemId: 'item-id',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -50,7 +51,7 @@ describe('item', () => {
       {
         itemId: 'item-id',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 

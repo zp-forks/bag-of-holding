@@ -11,6 +11,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 Date.now = jest.fn().mockReturnValue(1);
 
@@ -24,7 +25,7 @@ describe('removeTag', () => {
         itemId: 'item-id',
         tag: 'tag',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -43,7 +44,7 @@ describe('removeTag', () => {
         itemId: 'item-id',
         tag: 'tag',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -63,7 +64,7 @@ describe('removeTag', () => {
         itemId: 'item-id',
         tag: 'tag',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 

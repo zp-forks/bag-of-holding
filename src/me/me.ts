@@ -1,4 +1,4 @@
-import { QueryResolvers } from 'shared';
+import { logger, QueryResolvers } from 'shared';
 
 export const me: QueryResolvers['me'] = async (_, { userId }, { prisma }) => {
   const user = await prisma.user.findUnique({
@@ -13,6 +13,8 @@ export const me: QueryResolvers['me'] = async (_, { userId }, { prisma }) => {
       message: `User with ID ${userId} not found`,
     };
   }
+
+  logger.info(`Fetched user ${userId}`);
 
   return {
     ...user,

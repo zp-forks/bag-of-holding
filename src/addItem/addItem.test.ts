@@ -9,6 +9,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 describe('addItem', () => {
   it('calls create with correct values', async () => {
@@ -18,7 +19,7 @@ describe('addItem', () => {
         campaignId: 'campaign-id',
         input: { name: 'new item', quantity: 2, tags: [] },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -42,7 +43,7 @@ describe('addItem', () => {
         campaignId: 'campaign-id',
         input: { name: 'new item' },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -65,7 +66,7 @@ describe('addItem', () => {
     const result = await addItem!(
       {},
       { campaignId: 'campaign-id', input: { name: 'new item' } },
-      { prisma },
+      context,
       resolveInfo,
     );
 

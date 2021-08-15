@@ -9,6 +9,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 Date.now = jest.fn().mockReturnValue(1);
 
@@ -20,7 +21,7 @@ describe('editItem', () => {
         itemId: 'item-id',
         input: { name: 'new item', quantity: 2, tags: [] },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -42,7 +43,7 @@ describe('editItem', () => {
         itemId: 'item-id',
         input: {},
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -64,7 +65,7 @@ describe('editItem', () => {
         itemId: 'item-id',
         input: { description: null },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -89,7 +90,7 @@ describe('editItem', () => {
         itemId: 'item-id',
         input: { name: 'new item' },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -106,7 +107,7 @@ describe('editItem', () => {
         itemId: 'item-id',
         input: { name: 'new item', quantity: -1 },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -122,7 +123,7 @@ describe('editItem', () => {
     const result = await editItem!(
       {},
       { itemId: 'item-id', input: { name: 'new item' } },
-      { prisma },
+      context,
       resolveInfo,
     );
 
