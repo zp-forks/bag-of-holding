@@ -1,4 +1,4 @@
-import { QueryResolvers } from '../shared';
+import { QueryResolvers } from 'shared';
 
 export const me: QueryResolvers['me'] = async (_, { userId }, { prisma }) => {
   const user = await prisma.user.findUnique({

@@ -3,7 +3,7 @@ import {
   ModifyMoneyResult,
   MoneyModification,
   MutationResolvers,
-} from '../shared';
+} from 'shared';
 
 export const modifyMoney: MutationResolvers['modifyMoney'] = async (
   _,

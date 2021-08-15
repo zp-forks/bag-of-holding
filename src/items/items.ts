@@ -1,5 +1,5 @@
 import { Item as PItem } from '@prisma/client';
-import { CampaignResolvers, Item, logger } from '../shared';
+import { CampaignResolvers, Item, logger } from 'shared';
 
 const toGql = (item: PItem): Item => ({
   __typename: 'Item',

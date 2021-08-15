@@ -1,4 +1,4 @@
-import { FetchCampaignResult, logger, QueryResolvers } from '../shared';
+import { FetchCampaignResult, logger, QueryResolvers } from 'shared';
 
 export const fetchCampaign: QueryResolvers['campaign'] = async (
   _,

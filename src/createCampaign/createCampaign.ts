@@ -1,4 +1,4 @@
-import { CreatedCampaign, logger, MutationResolvers } from '../shared';
+import { CreatedCampaign, logger, MutationResolvers } from 'shared';
 
 export const createCampaign: MutationResolvers['createCampaign'] = async (
   _,

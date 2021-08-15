@@ -1,4 +1,4 @@
-import { FetchItemResult, logger, QueryResolvers } from '../shared';
+import { FetchItemResult, logger, QueryResolvers } from 'shared';
 
 export const fetchItem: QueryResolvers['item'] = async (
   _,

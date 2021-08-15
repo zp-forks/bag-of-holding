@@ -1,4 +1,4 @@
-import { EditItemResult, logger, MutationResolvers } from '../shared';
+import { EditItemResult, logger, MutationResolvers } from 'shared';
 
 export const editItem: MutationResolvers['editItem'] = async (
   _,
