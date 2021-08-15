@@ -1,10 +1,10 @@
-import { AddTagResult, logger, MutationResolvers } from 'shared';
+import { logger, MutationResolvers } from 'shared';
 
 export const addTag: MutationResolvers['addTag'] = async (
   _,
   { itemId, tag },
   { prisma },
-): Promise<AddTagResult> => {
+) => {
   try {
     const item = await prisma.item.findUnique({
       where: {

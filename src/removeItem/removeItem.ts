@@ -1,10 +1,10 @@
-import { MutationResolvers, RemoveItemResult } from 'shared';
+import { MutationResolvers } from 'shared';
 
 export const removeItem: MutationResolvers['removeItem'] = async (
   _,
   { itemId },
   { prisma },
-): Promise<RemoveItemResult> => {
+) => {
   try {
     const { campaign } = await prisma.item.delete({
       where: { id: itemId },

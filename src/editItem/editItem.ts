@@ -1,10 +1,10 @@
-import { EditItemResult, logger, MutationResolvers } from 'shared';
+import { logger, MutationResolvers } from 'shared';
 
 export const editItem: MutationResolvers['editItem'] = async (
   _,
   { itemId, input: { quantity, tags, name, ...input } },
   { prisma },
-): Promise<EditItemResult> => {
+) => {
   if (quantity && quantity < 0) {
     return {
       __typename: 'InvalidInput',

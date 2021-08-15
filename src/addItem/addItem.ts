@@ -1,10 +1,10 @@
-import { AddItemResult, logger, MutationResolvers } from 'shared';
+import { logger, MutationResolvers } from 'shared';
 
 export const addItem: MutationResolvers['addItem'] = async (
   _,
   { campaignId, input: { tags, quantity, ...input } },
   { prisma },
-): Promise<AddItemResult> => {
+) => {
   try {
     const { campaign } = await prisma.item.create({
       data: {

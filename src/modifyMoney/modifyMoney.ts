@@ -1,15 +1,10 @@
-import {
-  logger,
-  ModifyMoneyResult,
-  MoneyModification,
-  MutationResolvers,
-} from 'shared';
+import { logger, MoneyModification, MutationResolvers } from 'shared';
 
 export const modifyMoney: MutationResolvers['modifyMoney'] = async (
   _,
   { campaignId, input },
   { prisma },
-): Promise<ModifyMoneyResult> => {
+) => {
   let data = {};
 
   if (input.modification === MoneyModification.ADD) {
