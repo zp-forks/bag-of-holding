@@ -177,8 +177,8 @@ export type Query = {
   __typename: 'Query';
   campaigns: Array<Campaign>;
   campaign: FetchCampaignResult;
-  item?: Maybe<FetchItemResult>;
-  me?: Maybe<MeResult>;
+  item: FetchItemResult;
+  me: MeResult;
 };
 
 
@@ -438,8 +438,8 @@ export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversPa
 export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
   campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
   campaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryCampaignArgs, 'campaignId'>>;
-  item?: Resolver<Maybe<ResolversTypes['FetchItemResult']>, ParentType, ContextType, RequireFields<QueryItemArgs, 'itemId'>>;
-  me?: Resolver<Maybe<ResolversTypes['MeResult']>, ParentType, ContextType>;
+  item?: Resolver<ResolversTypes['FetchItemResult'], ParentType, ContextType, RequireFields<QueryItemArgs, 'itemId'>>;
+  me?: Resolver<ResolversTypes['MeResult'], ParentType, ContextType>;
 }>;
 
 export type RemoveItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveItemResult']> = ResolversObject<{

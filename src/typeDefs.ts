@@ -122,8 +122,8 @@ export const typeDefs = gql`
   type Query {
     campaigns: [Campaign!]!
     campaign(campaignId: ID!): FetchCampaignResult!
-    item(itemId: ID!): FetchItemResult
-    me: MeResult
+    item(itemId: ID!): FetchItemResult!
+    me: MeResult!
   }
 
   type Mutation {
