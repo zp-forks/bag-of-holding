@@ -12,7 +12,7 @@ generates:
       nonOptionalTypename: true
       avoidOptionals: false
       showUnusedMappers: true
-      contextType: ../../typeDefs#GQLContext
+      contextType: typeDefs#GQLContext
       namingConvention:
         typeNames: change-case#pascalCase
         enumValues: change-case#upperCase
