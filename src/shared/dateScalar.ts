@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { GraphQLScalarType, Kind } from 'graphql';
 
 export const dateScalar = new GraphQLScalarType({

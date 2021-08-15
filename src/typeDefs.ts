@@ -123,7 +123,7 @@ export const typeDefs = gql`
     campaigns: [Campaign!]!
     campaign(campaignId: ID!): FetchCampaignResult!
     item(itemId: ID!): FetchItemResult
-    me(userId: ID!): MeResult
+    me: MeResult
   }
 
   type Mutation {

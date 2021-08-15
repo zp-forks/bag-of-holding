@@ -9,18 +9,11 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
-const context = { prisma, accessToken: '123' };
+const context = { prisma, accessToken: 'user-id' };
 
 describe('me', () => {
   it('calls find unique with correct values', async () => {
-    await me!(
-      {},
-      {
-        userId: 'user-id',
-      },
-      context,
-      resolveInfo,
-    );
+    await me!({}, {}, context, resolveInfo);
 
     expect(findUnique).toHaveBeenCalledWith({
       where: { id: 'user-id' },
@@ -30,14 +23,7 @@ describe('me', () => {
   it('returns a user', async () => {
     findUnique.mockResolvedValueOnce({ email: 'email' });
 
-    const result = await me!(
-      {},
-      {
-        userId: 'user-id',
-      },
-      context,
-      resolveInfo,
-    );
+    const result = await me!({}, {}, context, resolveInfo);
 
     expect(result).toStrictEqual({
       __typename: 'User',
@@ -49,14 +35,7 @@ describe('me', () => {
   it('returns a user not found when no user found', async () => {
     findUnique.mockResolvedValueOnce(null);
 
-    const result = await me!(
-      {},
-      {
-        userId: 'user-id',
-      },
-      context,
-      resolveInfo,
-    );
+    const result = await me!({}, {}, context, resolveInfo);
 
     expect(result).toStrictEqual({
       __typename: 'UserNotFound',
