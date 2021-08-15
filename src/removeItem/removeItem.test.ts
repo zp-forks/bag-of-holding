@@ -48,6 +48,10 @@ describe('removeItem', () => {
       resolveInfo,
     );
 
-    expect(result).toStrictEqual({ __typename: 'Campaign', name: 'name' });
+    expect(result).toStrictEqual({
+      __typename: 'Campaign',
+      name: 'name',
+      items: [],
+    });
   });
 });

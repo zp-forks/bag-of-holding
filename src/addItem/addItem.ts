@@ -21,6 +21,7 @@ export const addItem: MutationResolvers['addItem'] = async (
     return {
       __typename: 'Campaign',
       ...campaign,
+      items: [],
     };
   } catch {
     return {

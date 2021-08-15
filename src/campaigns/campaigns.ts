@@ -4,6 +4,7 @@ import { Campaign, logger, QueryResolvers } from '../shared';
 const toGql = (campaign: PCampaign): Campaign => ({
   __typename: 'Campaign',
   ...campaign,
+  items: [],
 });
 
 export const listCampaigns: QueryResolvers['campaigns'] = async (
