@@ -11,7 +11,7 @@ const schema = makeExecutableSchema({
 });
 
 const extractUserId = (headers: IncomingHttpHeaders) => {
-  const header = headers['bag-access-token'];
+  const header = headers['bag-user-id'];
   return header || '';
 };
 
