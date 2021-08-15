@@ -9,12 +9,13 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 describe('userCampaigns', () => {
   it('calls find many with correct values', async () => {
     findMany.mockResolvedValueOnce([]);
 
-    await userCampaigns!({ id: 'user-id' } as any, {}, { prisma }, resolveInfo);
+    await userCampaigns!({ id: 'user-id' } as any, {}, context, resolveInfo);
 
     expect(findMany).toHaveBeenCalledWith({
       where: { users: { some: { id: 'user-id' } } },
@@ -27,7 +28,7 @@ describe('userCampaigns', () => {
     const result = await userCampaigns!(
       { id: 'user-id' } as any,
       {},
-      { prisma },
+      context,
       resolveInfo,
     );
 

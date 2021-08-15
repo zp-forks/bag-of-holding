@@ -10,6 +10,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 describe('modifyMoney', () => {
   it('adds money', async () => {
@@ -28,7 +29,7 @@ describe('modifyMoney', () => {
           silver: 5,
         },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -60,7 +61,7 @@ describe('modifyMoney', () => {
           silver: 5,
         },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -92,7 +93,7 @@ describe('modifyMoney', () => {
           silver: 5,
         },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -119,7 +120,7 @@ describe('modifyMoney', () => {
           silver: 5,
         },
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 

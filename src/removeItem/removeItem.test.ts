@@ -9,12 +9,13 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 Date.now = jest.fn().mockReturnValue(1);
 
 describe('removeItem', () => {
   it('calls delete with correct values', async () => {
-    await removeItem!({}, { itemId: 'item-id' }, { prisma }, resolveInfo);
+    await removeItem!({}, { itemId: 'item-id' }, context, resolveInfo);
 
     expect(deleteMock).toHaveBeenCalledWith({
       where: { id: 'item-id' },
@@ -28,7 +29,7 @@ describe('removeItem', () => {
     const result = await removeItem!(
       {},
       { itemId: 'item-id' },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -44,7 +45,7 @@ describe('removeItem', () => {
     const result = await removeItem!(
       {},
       { itemId: 'item-id' },
-      { prisma },
+      context,
       resolveInfo,
     );
 

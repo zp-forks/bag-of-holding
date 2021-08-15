@@ -9,6 +9,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 describe('items', () => {
   it('calls find many with correct values', async () => {
@@ -19,7 +20,7 @@ describe('items', () => {
       {
         itemId: 'item-id',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -36,7 +37,7 @@ describe('items', () => {
       {
         itemId: 'item-id',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 

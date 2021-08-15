@@ -10,6 +10,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
+const context = { prisma, accessToken: '123' };
 
 describe('addTag', () => {
   it('calls update with correct values', async () => {
@@ -20,7 +21,7 @@ describe('addTag', () => {
         itemId: 'item-id',
         tag: 'tag',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -39,7 +40,7 @@ describe('addTag', () => {
         itemId: 'item-id',
         tag: 'tag-2',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -58,7 +59,7 @@ describe('addTag', () => {
         itemId: 'item-id',
         tag: 'tag',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
@@ -74,7 +75,7 @@ describe('addTag', () => {
         itemId: 'item-id',
         tag: 'tag',
       },
-      { prisma },
+      context,
       resolveInfo,
     );
 
