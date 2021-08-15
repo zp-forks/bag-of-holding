@@ -7,7 +7,7 @@ export type GQLContext = {
     never,
     Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
   >;
-  accessToken: string;
+  userId: string;
 };
 
 export const typeDefs = gql`

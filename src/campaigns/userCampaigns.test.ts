@@ -9,7 +9,7 @@ const prisma = {
 } as any;
 
 const resolveInfo: any = {};
-const context = { prisma, accessToken: '123' };
+const context = { prisma, userId: '123' };
 
 describe('userCampaigns', () => {
   it('calls find many with correct values', async () => {
