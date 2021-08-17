@@ -32,6 +32,8 @@ export type AddItemResult = Campaign | CampaignNotFound;
 
 export type AddTagResult = Item | ItemNotFound;
 
+export type AddUserResult = Campaign | CampaignNotFound | UserNotFound;
+
 export type Campaign = {
   __typename: 'Campaign';
   id: Scalars['ID'];
@@ -120,6 +122,7 @@ export type Mutation = {
   addTag: AddTagResult;
   removeTag: RemoveTagResult;
   login: User;
+  addUser: AddUserResult;
 };
 
 
@@ -165,6 +168,11 @@ export type MutationRemoveTagArgs = {
 
 export type MutationLoginArgs = {
   externalId: Scalars['String'];
+};
+
+
+export type MutationAddUserArgs = {
+  campaignId: Scalars['String'];
 };
 
 export type Query = {
@@ -282,6 +290,7 @@ export type ResolversTypes = ResolversObject<{
   Int: ResolverTypeWrapper<Scalars['Int']>;
   AddItemResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   AddTagResult: ResolversTypes['Item'] | ResolversTypes['ItemNotFound'];
+  AddUserResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'] | ResolversTypes['UserNotFound'];
   Campaign: ResolverTypeWrapper<Campaign>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   CampaignNotFound: ResolverTypeWrapper<CampaignNotFound>;
@@ -315,6 +324,7 @@ export type ResolversParentTypes = ResolversObject<{
   Int: Scalars['Int'];
   AddItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   AddTagResult: ResolversParentTypes['Item'] | ResolversParentTypes['ItemNotFound'];
+  AddUserResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'] | ResolversParentTypes['UserNotFound'];
   Campaign: Campaign;
   ID: Scalars['ID'];
   CampaignNotFound: CampaignNotFound;
@@ -346,6 +356,10 @@ export type AddItemResultResolvers<ContextType = GQLContext, ParentType = Resolv
 
 export type AddTagResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['AddTagResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Item' | 'ItemNotFound', ParentType, ContextType>;
+}>;
+
+export type AddUserResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['AddUserResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound' | 'UserNotFound', ParentType, ContextType>;
 }>;
 
 export type CampaignResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Campaign']> = ResolversObject<{
@@ -426,6 +440,7 @@ export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversPa
   addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'itemId' | 'tag'>>;
   removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'itemId' | 'tag'>>;
   login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'externalId'>>;
+  addUser?: Resolver<ResolversTypes['AddUserResult'], ParentType, ContextType, RequireFields<MutationAddUserArgs, 'campaignId'>>;
 }>;
 
 export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
@@ -462,6 +477,7 @@ export type UserNotFoundResolvers<ContextType = GQLContext, ParentType = Resolve
 export type Resolvers<ContextType = GQLContext> = ResolversObject<{
   AddItemResult?: AddItemResultResolvers<ContextType>;
   AddTagResult?: AddTagResultResolvers<ContextType>;
+  AddUserResult?: AddUserResultResolvers<ContextType>;
   Campaign?: CampaignResolvers<ContextType>;
   CampaignNotFound?: CampaignNotFoundResolvers<ContextType>;
   CreatedCampaign?: CreatedCampaignResolvers<ContextType>;

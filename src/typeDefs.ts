@@ -113,6 +113,7 @@ export const typeDefs = gql`
   union AddTagResult = Item | ItemNotFound
   union RemoveTagResult = Item | ItemNotFound
   union MeResult = User | UserNotFound
+  union AddUserResult = Campaign | CampaignNotFound | UserNotFound
 
   type Query {
     campaigns: [Campaign!]!
@@ -132,5 +133,6 @@ export const typeDefs = gql`
     removeTag(itemId: ID!, tag: String!): RemoveTagResult!
 
     login(externalId: String!): User!
+    addUser(campaignId: String!): AddUserResult!
   }
 `;
