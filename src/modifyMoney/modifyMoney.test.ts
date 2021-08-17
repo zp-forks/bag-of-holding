@@ -101,6 +101,7 @@ describe('modifyMoney', () => {
       __typename: 'Campaign',
       name: 'name',
       items: [],
+      users: [],
     });
   });
 

@@ -10,7 +10,7 @@ export const addUser: MutationResolvers['addUser'] = async (
       where: { id: campaignId },
       data: { users: { connect: { id: userId } } },
     });
-    return { __typename: 'Campaign', ...campaign, items: [] };
+    return { __typename: 'Campaign', ...campaign, items: [], users: [] };
   } catch (error) {
     // error code for connected object not being found
     if (error.code === 'P2025') {

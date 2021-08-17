@@ -15,6 +15,7 @@ export const removeItem: MutationResolvers['removeItem'] = async (
       __typename: 'Campaign',
       ...campaign,
       items: [],
+      users: [],
     };
   } catch {
     return {

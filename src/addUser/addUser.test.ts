@@ -44,6 +44,7 @@ describe('addUser', () => {
       __typename: 'Campaign',
       name: 'Campaign name',
       items: [],
+      users: [],
     });
   });
 

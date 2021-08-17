@@ -74,6 +74,7 @@ describe('addItem', () => {
       __typename: 'Campaign',
       name: 'name',
       items: [],
+      users: [],
     });
   });
 });

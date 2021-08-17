@@ -53,6 +53,7 @@ describe('removeItem', () => {
       __typename: 'Campaign',
       name: 'name',
       items: [],
+      users: [],
     });
   });
 });

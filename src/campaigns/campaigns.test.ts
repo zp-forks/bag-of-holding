@@ -40,8 +40,8 @@ describe('campaigns', () => {
     );
 
     expect(result).toStrictEqual([
-      { __typename: 'Campaign', name: 'name', items: [] },
-      { __typename: 'Campaign', name: 'name2', items: [] },
+      { __typename: 'Campaign', name: 'name', items: [], users: [] },
+      { __typename: 'Campaign', name: 'name2', items: [], users: [] },
     ]);
   });
 });

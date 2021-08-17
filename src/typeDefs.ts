@@ -38,6 +38,7 @@ export const typeDefs = gql`
     copper: Int!
     items: [Item!]!
     createdAt: Date!
+    users: [User!]!
   }
 
   type User {

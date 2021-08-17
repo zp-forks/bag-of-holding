@@ -45,6 +45,7 @@ export type Campaign = {
   copper: Scalars['Int'];
   items: Array<Item>;
   createdAt: Scalars['Date'];
+  users: Array<User>;
 };
 
 export type CampaignNotFound = {
@@ -372,6 +373,7 @@ export type CampaignResolvers<ContextType = GQLContext, ParentType = ResolversPa
   copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
