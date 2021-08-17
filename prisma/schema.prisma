@@ -34,11 +34,11 @@ model Item {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  email     String     @unique
-  lastLogin DateTime   @default(now())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime?
-  campaigns Campaign[]
-
+  id         String     @id @default(uuid())
+  externalId String     @unique
+  lastLogin  DateTime   @default(now())
+  createdAt  DateTime   @default(now())
+  imageUrl   String?
+  updatedAt  DateTime?
+  campaigns  Campaign[]
 }

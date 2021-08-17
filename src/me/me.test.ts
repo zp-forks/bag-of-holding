@@ -21,13 +21,13 @@ describe('me', () => {
   });
 
   it('returns a user', async () => {
-    findUnique.mockResolvedValueOnce({ email: 'email' });
+    findUnique.mockResolvedValueOnce({ externalId: 'externalId' });
 
     const result = await me!({}, {}, context, resolveInfo);
 
     expect(result).toStrictEqual({
       __typename: 'User',
-      email: 'email',
+      externalId: 'externalId',
       campaigns: [],
     });
   });
