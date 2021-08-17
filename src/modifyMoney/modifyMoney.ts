@@ -38,6 +38,7 @@ export const modifyMoney: MutationResolvers['modifyMoney'] = async (
       items: [],
       users: [],
       itemCount: 0,
+      userCount: 0,
     };
   } catch {
     return {

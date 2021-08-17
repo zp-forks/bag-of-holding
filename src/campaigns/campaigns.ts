@@ -7,6 +7,7 @@ const toGql = (campaign: PCampaign): Campaign => ({
   items: [],
   users: [],
   itemCount: 0,
+  userCount: 0,
 });
 
 export const listCampaigns: QueryResolvers['campaigns'] = async (

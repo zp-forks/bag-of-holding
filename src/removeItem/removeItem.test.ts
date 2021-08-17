@@ -55,6 +55,7 @@ describe('removeItem', () => {
       items: [],
       users: [],
       itemCount: 0,
+      userCount: 0,
     });
   });
 });

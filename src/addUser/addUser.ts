@@ -17,6 +17,7 @@ export const addUser: MutationResolvers['addUser'] = async (
       items: [],
       users: [],
       itemCount: 0,
+      userCount: 0,
     };
   } catch (error) {
     // error code for connected object not being found

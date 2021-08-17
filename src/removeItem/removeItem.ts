@@ -17,6 +17,7 @@ export const removeItem: MutationResolvers['removeItem'] = async (
       items: [],
       users: [],
       itemCount: 0,
+      userCount: 0,
     };
   } catch {
     return {

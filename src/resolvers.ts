@@ -4,6 +4,7 @@ import { addUser } from 'addUser';
 import { campaign } from 'campaign';
 import { campaigns, userCampaigns } from 'campaigns';
 import { itemCount } from 'count';
+import { userCount } from 'count/userCount';
 import { createCampaign } from 'createCampaign';
 import { editItem } from 'editItem';
 import { item } from 'item';
@@ -21,6 +22,7 @@ export const resolvers: Resolvers = {
     items,
     users,
     itemCount,
+    userCount,
   },
   Mutation: {
     createCampaign,

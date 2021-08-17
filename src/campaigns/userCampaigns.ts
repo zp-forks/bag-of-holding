@@ -17,5 +17,6 @@ export const userCampaigns: UserResolvers['campaigns'] = async (
     items: [],
     users: [],
     itemCount: 0,
+    userCount: 0,
   }));
 };

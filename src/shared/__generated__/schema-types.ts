@@ -47,6 +47,7 @@ export type Campaign = {
   createdAt: Scalars['Date'];
   users: Array<User>;
   itemCount: Scalars['Int'];
+  userCount: Scalars['Int'];
 };
 
 export type CampaignNotFound = {
@@ -376,6 +377,7 @@ export type CampaignResolvers<ContextType = GQLContext, ParentType = ResolversPa
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   itemCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  userCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

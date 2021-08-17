@@ -46,6 +46,7 @@ describe('campaigns', () => {
         items: [],
         users: [],
         itemCount: 0,
+        userCount: 0,
       },
       {
         __typename: 'Campaign',
@@ -53,6 +54,7 @@ describe('campaigns', () => {
         items: [],
         users: [],
         itemCount: 0,
+        userCount: 0,
       },
     ]);
   });
