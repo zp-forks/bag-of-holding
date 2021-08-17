@@ -33,8 +33,20 @@ describe('userCampaigns', () => {
     );
 
     expect(result).toStrictEqual([
-      { __typename: 'Campaign', name: 'name', items: [], users: [] },
-      { __typename: 'Campaign', name: 'name2', items: [], users: [] },
+      {
+        __typename: 'Campaign',
+        name: 'name',
+        items: [],
+        users: [],
+        itemCount: 0,
+      },
+      {
+        __typename: 'Campaign',
+        name: 'name2',
+        items: [],
+        users: [],
+        itemCount: 0,
+      },
     ]);
   });
 });

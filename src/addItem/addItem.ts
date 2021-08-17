@@ -23,6 +23,7 @@ export const addItem: MutationResolvers['addItem'] = async (
       ...campaign,
       items: [],
       users: [],
+      itemCount: 0,
     };
   } catch {
     return {

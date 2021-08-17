@@ -75,6 +75,7 @@ describe('addItem', () => {
       name: 'name',
       items: [],
       users: [],
+      itemCount: 0,
     });
   });
 });

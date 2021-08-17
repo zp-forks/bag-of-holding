@@ -32,7 +32,13 @@ export const modifyMoney: MutationResolvers['modifyMoney'] = async (
     });
 
     logger.info(`Updated currency on campaign ${campaignId}`);
-    return { __typename: 'Campaign', ...campaign, items: [], users: [] };
+    return {
+      __typename: 'Campaign',
+      ...campaign,
+      items: [],
+      users: [],
+      itemCount: 0,
+    };
   } catch {
     return {
       __typename: 'CampaignNotFound',

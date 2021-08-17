@@ -39,6 +39,7 @@ export const typeDefs = gql`
     items: [Item!]!
     createdAt: Date!
     users: [User!]!
+    itemCount: Int!
   }
 
   type User {

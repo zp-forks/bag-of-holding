@@ -45,6 +45,7 @@ describe('addUser', () => {
       name: 'Campaign name',
       items: [],
       users: [],
+      itemCount: 0,
     });
   });
 

@@ -102,6 +102,7 @@ describe('modifyMoney', () => {
       name: 'name',
       items: [],
       users: [],
+      itemCount: 0,
     });
   });
 
