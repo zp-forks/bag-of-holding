@@ -2,15 +2,15 @@ import { MutationResolvers } from 'shared';
 
 export const login: MutationResolvers['login'] = async (
   _,
-  { input },
+  { externalId },
   { prisma },
 ) => {
   const user = await prisma.user.upsert({
     where: {
-      email: input.email,
+      externalId,
     },
     create: {
-      email: input.email,
+      externalId,
       lastLogin: new Date(),
     },
     update: {

@@ -42,10 +42,11 @@ export const typeDefs = gql`
 
   type User {
     id: ID!
-    email: String!
+    externalId: String!
     lastLogin: Date!
     createdAt: Date!
     updatedAt: Date
+    imageUrl: String
     campaigns: [Campaign!]!
   }
 
@@ -102,12 +103,6 @@ export const typeDefs = gql`
     copper: Int!
   }
 
-  input LoginInput {
-    email: String!
-    firstName: String
-    lastName: String
-  }
-
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
@@ -136,6 +131,6 @@ export const typeDefs = gql`
     addTag(itemId: ID!, tag: String!): AddTagResult!
     removeTag(itemId: ID!, tag: String!): RemoveTagResult!
 
-    login(input: LoginInput!): User!
+    login(externalId: String!): User!
   }
 `;

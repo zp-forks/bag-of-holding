@@ -14,16 +14,14 @@ const context = { prisma, userId: '123' };
 describe('login', () => {
   it('creates or updates user record', async () => {
     upsert.mockResolvedValueOnce({
-      email: 'a@b.com',
+      externalId: 'a@b.com',
       campaigns: [],
     });
 
     await login!(
       {},
       {
-        input: {
-          email: 'a@b.com',
-        },
+        externalId: 'a@b.com',
       },
       context,
       resolveInfo,
@@ -31,10 +29,10 @@ describe('login', () => {
 
     expect(upsert).toHaveBeenCalledWith({
       where: {
-        email: 'a@b.com',
+        externalId: 'a@b.com',
       },
       create: {
-        email: 'a@b.com',
+        externalId: 'a@b.com',
         lastLogin: expect.any(Date),
       },
       update: {
