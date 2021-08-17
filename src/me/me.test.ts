@@ -29,6 +29,7 @@ describe('me', () => {
       __typename: 'User',
       externalId: 'externalId',
       campaigns: [],
+      campaignCount: 0,
     });
   });
 

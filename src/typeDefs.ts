@@ -51,6 +51,7 @@ export const typeDefs = gql`
     updatedAt: Date
     imageUrl: String
     campaigns: [Campaign!]!
+    campaignCount: Int!
   }
 
   type CampaignNotFound {

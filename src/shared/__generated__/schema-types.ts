@@ -214,6 +214,7 @@ export type User = {
   updatedAt?: Maybe<Scalars['Date']>;
   imageUrl?: Maybe<Scalars['String']>;
   campaigns: Array<Campaign>;
+  campaignCount: Scalars['Int'];
 };
 
 export type UserNotFound = {
@@ -472,6 +473,7 @@ export type UserResolvers<ContextType = GQLContext, ParentType = ResolversParent
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
+  campaignCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

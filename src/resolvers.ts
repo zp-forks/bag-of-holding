@@ -3,7 +3,7 @@ import { addTag } from 'addTag';
 import { addUser } from 'addUser';
 import { campaign } from 'campaign';
 import { campaigns, userCampaigns } from 'campaigns';
-import { itemCount } from 'count';
+import { campaignCount, itemCount } from 'count';
 import { userCount } from 'count/userCount';
 import { createCampaign } from 'createCampaign';
 import { editItem } from 'editItem';
@@ -43,6 +43,7 @@ export const resolvers: Resolvers = {
   },
   User: {
     campaigns: userCampaigns,
+    campaignCount,
   },
   Date: dateScalar,
 };
