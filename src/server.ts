@@ -15,12 +15,14 @@ const extractUserId = (headers: IncomingHttpHeaders) => {
   return header || '';
 };
 
+const prisma = new PrismaClient();
+
 export const server = new ApolloServer({
   schema,
   playground: true,
   introspection: true,
   context: ({ req }) => {
     const userId = extractUserId(req.headers);
-    return { prisma: new PrismaClient(), userId };
+    return { prisma, userId };
   },
 });
