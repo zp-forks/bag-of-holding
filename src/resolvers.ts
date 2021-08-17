@@ -13,9 +13,10 @@ import { removeItem } from 'removeItem';
 import { removeTag } from 'removeTag';
 import { dateScalar, Resolvers } from 'shared';
 import { addUser } from 'addUser';
+import { users } from 'users';
 
 export const resolvers: Resolvers = {
-  Campaign: { items },
+  Campaign: { items, users },
   Mutation: {
     createCampaign,
     modifyMoney,
