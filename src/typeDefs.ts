@@ -13,10 +13,6 @@ export type GQLContext = {
 export const typeDefs = gql`
   scalar Date
 
-  type CreatedCampaign {
-    id: ID!
-  }
-
   type Item {
     id: ID!
     name: String!
@@ -112,6 +108,7 @@ export const typeDefs = gql`
   union ModifyMoneyResult = Campaign | CampaignNotFound
   union RemoveItemResult = Campaign | ItemNotFound
 
+  union CreateCampaignResult = Campaign | InvalidInput
   union FetchItemResult = Item | ItemNotFound
   union EditItemResult = Item | InvalidInput | ItemNotFound
   union AddTagResult = Item | ItemNotFound
@@ -127,7 +124,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createCampaign(name: String!): CreatedCampaign!
+    createCampaign(name: String!): CreateCampaignResult!
     modifyMoney(campaignId: ID!, input: ModifyMoneyInput!): ModifyMoneyResult!
     addItem(campaignId: ID!, input: AddItemInput!): AddItemResult!
     removeItem(itemId: ID!): RemoveItemResult!
