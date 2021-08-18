@@ -13,9 +13,11 @@ const toGql = (campaign: PCampaign): Campaign => ({
 export const listCampaigns: QueryResolvers['campaigns'] = async (
   _,
   __,
-  { prisma },
+  { prisma, userId },
 ) => {
-  const campaigns = await prisma.campaign.findMany();
+  const campaigns = await prisma.campaign.findMany({
+    where: { users: { some: { id: userId } } },
+  });
 
   logger.info('Listing all campaigns');
 

@@ -3,11 +3,11 @@ import { logger, QueryResolvers } from 'shared';
 export const fetchCampaign: QueryResolvers['campaign'] = async (
   _,
   { campaignId },
-  { prisma },
+  { prisma, userId },
 ) => {
   try {
-    const campaign = await prisma.campaign.findUnique({
-      where: { id: campaignId },
+    const campaign = await prisma.campaign.findFirst({
+      where: { id: campaignId, users: { some: { id: userId } } },
       rejectOnNotFound: true,
     });
 

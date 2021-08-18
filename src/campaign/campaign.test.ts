@@ -1,10 +1,10 @@
 import { fetchCampaign } from './campaign';
 
-const findUnique = jest.fn();
+const findFirst = jest.fn();
 
 const prisma = {
   campaign: {
-    findUnique,
+    findFirst,
   },
 } as any;
 
@@ -22,14 +22,14 @@ describe('campaign', () => {
       resolveInfo,
     );
 
-    expect(findUnique).toHaveBeenCalledWith({
-      where: { id: 'campaign-id' },
+    expect(findFirst).toHaveBeenCalledWith({
+      where: { id: 'campaign-id', users: { some: { id: '123' } } },
       rejectOnNotFound: true,
     });
   });
 
   it('returns a campaign', async () => {
-    findUnique.mockResolvedValueOnce({ name: 'name' });
+    findFirst.mockResolvedValueOnce({ name: 'name' });
 
     const result = await fetchCampaign!(
       {},
@@ -51,7 +51,7 @@ describe('campaign', () => {
   });
 
   it('returns a campaign not found when db call throws', async () => {
-    findUnique.mockRejectedValueOnce(new Error());
+    findFirst.mockRejectedValueOnce(new Error());
 
     const result = await fetchCampaign!(
       {},

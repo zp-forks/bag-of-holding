@@ -24,7 +24,9 @@ describe('campaigns', () => {
       resolveInfo,
     );
 
-    expect(findMany).toHaveBeenCalledWith();
+    expect(findMany).toHaveBeenCalledWith({
+      where: { users: { some: { id: '123' } } },
+    });
   });
 
   it('returns a list of campaigns', async () => {
