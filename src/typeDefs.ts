@@ -137,6 +137,6 @@ export const typeDefs = gql`
     removeTag(itemId: ID!, tag: String!): RemoveTagResult!
 
     login(externalId: String!): User!
-    addUser(campaignId: String!): AddUserResult!
+    joinCampaign(campaignId: String!): AddUserResult!
   }
 `;

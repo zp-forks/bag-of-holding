@@ -1,6 +1,6 @@
 import { addItem } from 'addItem';
 import { addTag } from 'addTag';
-import { addUser } from 'addUser';
+import { joinCampaign } from 'joinCampaign';
 import { campaign } from 'campaign';
 import { campaigns, userCampaigns } from 'campaigns';
 import { campaignCount, itemCount } from 'count';
@@ -33,7 +33,7 @@ export const resolvers: Resolvers = {
     addTag,
     removeTag,
     login,
-    addUser,
+    joinCampaign,
   },
   Query: {
     campaigns,

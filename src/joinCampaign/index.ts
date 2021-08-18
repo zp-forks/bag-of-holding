@@ -1,0 +1,1 @@
+export { joinCampaign } from './joinCampaign';

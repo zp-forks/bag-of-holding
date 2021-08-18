@@ -1,4 +1,4 @@
-import { addUser } from './addUser';
+import { joinCampaign } from './joinCampaign';
 
 const update = jest.fn();
 
@@ -11,10 +11,10 @@ const prisma = {
 const resolveInfo: any = {};
 const context = { prisma, userId: '123' };
 
-describe('addUser', () => {
+describe('joinCampaign', () => {
   it('calls update with correct values', async () => {
     prisma.campaign.update.mockReturnValue({ name: 'Campaign name' });
-    await addUser!(
+    await joinCampaign!(
       {},
       {
         campaignId: 'campaign-id',
@@ -31,7 +31,7 @@ describe('addUser', () => {
 
   it('returns a campaign', async () => {
     prisma.campaign.update.mockReturnValue({ name: 'Campaign name' });
-    const result = await addUser!(
+    const result = await joinCampaign!(
       {},
       {
         campaignId: 'campaign-id',
@@ -52,7 +52,7 @@ describe('addUser', () => {
 
   it('returns user not found when connection fails', async () => {
     update.mockRejectedValue({ code: 'P2025' });
-    const result = await addUser!(
+    const result = await joinCampaign!(
       {},
       {
         campaignId: 'campaign-id',
@@ -69,7 +69,7 @@ describe('addUser', () => {
 
   it('returns campaign not found when other errors are thrown', async () => {
     update.mockRejectedValue(new Error());
-    const result = await addUser!(
+    const result = await joinCampaign!(
       {},
       {
         campaignId: 'campaign-id',

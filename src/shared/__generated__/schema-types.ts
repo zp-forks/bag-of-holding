@@ -125,7 +125,7 @@ export type Mutation = {
   addTag: AddTagResult;
   removeTag: RemoveTagResult;
   login: User;
-  addUser: AddUserResult;
+  joinCampaign: AddUserResult;
 };
 
 
@@ -174,7 +174,7 @@ export type MutationLoginArgs = {
 };
 
 
-export type MutationAddUserArgs = {
+export type MutationJoinCampaignArgs = {
   campaignId: Scalars['String'];
 };
 
@@ -447,7 +447,7 @@ export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversPa
   addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'itemId' | 'tag'>>;
   removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'itemId' | 'tag'>>;
   login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'externalId'>>;
-  addUser?: Resolver<ResolversTypes['AddUserResult'], ParentType, ContextType, RequireFields<MutationAddUserArgs, 'campaignId'>>;
+  joinCampaign?: Resolver<ResolversTypes['AddUserResult'], ParentType, ContextType, RequireFields<MutationJoinCampaignArgs, 'campaignId'>>;
 }>;
 
 export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Query']> = ResolversObject<{

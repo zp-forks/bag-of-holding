@@ -1,6 +1,6 @@
 import { MutationResolvers } from 'shared';
 
-export const addUser: MutationResolvers['addUser'] = async (
+export const joinCampaign: MutationResolvers['joinCampaign'] = async (
   _,
   { campaignId },
   { prisma, userId },
