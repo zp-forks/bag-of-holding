@@ -16,6 +16,7 @@ import { removeItem } from 'removeItem';
 import { removeTag } from 'removeTag';
 import { dateScalar, Resolvers } from 'shared';
 import { users } from 'users';
+import { editUser } from 'editUser';
 
 export const resolvers: Resolvers = {
   Campaign: {
@@ -34,6 +35,7 @@ export const resolvers: Resolvers = {
     removeTag,
     login,
     joinCampaign,
+    editUser,
   },
   Query: {
     campaigns,

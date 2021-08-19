@@ -69,6 +69,13 @@ export type EditItemInput = {
 
 export type EditItemResult = Item | InvalidInput | ItemNotFound;
 
+export type EditUserInput = {
+  username?: Maybe<Scalars['String']>;
+  imageUrl?: Maybe<Scalars['String']>;
+};
+
+export type EditUserResult = User | UserNotFound;
+
 export type FetchCampaignResult = Campaign | CampaignNotFound;
 
 export type FetchItemResult = Item | ItemNotFound;
@@ -122,6 +129,7 @@ export type Mutation = {
   editItem: EditItemResult;
   addTag: AddTagResult;
   removeTag: RemoveTagResult;
+  editUser: EditUserResult;
   login: User;
   joinCampaign: AddUserResult;
 };
@@ -164,6 +172,11 @@ export type MutationAddTagArgs = {
 export type MutationRemoveTagArgs = {
   itemId: Scalars['ID'];
   tag: Scalars['String'];
+};
+
+
+export type MutationEditUserArgs = {
+  input: EditUserInput;
 };
 
 
@@ -301,6 +314,8 @@ export type ResolversTypes = ResolversObject<{
   Date: ResolverTypeWrapper<Scalars['Date']>;
   EditItemInput: EditItemInput;
   EditItemResult: ResolversTypes['Item'] | ResolversTypes['InvalidInput'] | ResolversTypes['ItemNotFound'];
+  EditUserInput: EditUserInput;
+  EditUserResult: ResolversTypes['User'] | ResolversTypes['UserNotFound'];
   FetchCampaignResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   FetchItemResult: ResolversTypes['Item'] | ResolversTypes['ItemNotFound'];
   InvalidInput: ResolverTypeWrapper<InvalidInput>;
@@ -335,6 +350,8 @@ export type ResolversParentTypes = ResolversObject<{
   Date: Scalars['Date'];
   EditItemInput: EditItemInput;
   EditItemResult: ResolversParentTypes['Item'] | ResolversParentTypes['InvalidInput'] | ResolversParentTypes['ItemNotFound'];
+  EditUserInput: EditUserInput;
+  EditUserResult: ResolversParentTypes['User'] | ResolversParentTypes['UserNotFound'];
   FetchCampaignResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   FetchItemResult: ResolversParentTypes['Item'] | ResolversParentTypes['ItemNotFound'];
   InvalidInput: InvalidInput;
@@ -399,6 +416,10 @@ export type EditItemResultResolvers<ContextType = GQLContext, ParentType = Resol
   __resolveType: TypeResolveFn<'Item' | 'InvalidInput' | 'ItemNotFound', ParentType, ContextType>;
 }>;
 
+export type EditUserResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['EditUserResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'User' | 'UserNotFound', ParentType, ContextType>;
+}>;
+
 export type FetchCampaignResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['FetchCampaignResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
@@ -445,6 +466,7 @@ export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversPa
   editItem?: Resolver<ResolversTypes['EditItemResult'], ParentType, ContextType, RequireFields<MutationEditItemArgs, 'itemId' | 'input'>>;
   addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'itemId' | 'tag'>>;
   removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'itemId' | 'tag'>>;
+  editUser?: Resolver<ResolversTypes['EditUserResult'], ParentType, ContextType, RequireFields<MutationEditUserArgs, 'input'>>;
   login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'externalId'>>;
   joinCampaign?: Resolver<ResolversTypes['AddUserResult'], ParentType, ContextType, RequireFields<MutationJoinCampaignArgs, 'campaignId'>>;
 }>;
@@ -491,6 +513,7 @@ export type Resolvers<ContextType = GQLContext> = ResolversObject<{
   CreateCampaignResult?: CreateCampaignResultResolvers<ContextType>;
   Date?: GraphQLScalarType;
   EditItemResult?: EditItemResultResolvers<ContextType>;
+  EditUserResult?: EditUserResultResolvers<ContextType>;
   FetchCampaignResult?: FetchCampaignResultResolvers<ContextType>;
   FetchItemResult?: FetchItemResultResolvers<ContextType>;
   InvalidInput?: InvalidInputResolvers<ContextType>;

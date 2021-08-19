@@ -89,6 +89,11 @@ export const typeDefs = gql`
     tags: [String!]
   }
 
+  input EditUserInput {
+    username: String
+    imageUrl: String
+  }
+
   input RemoveItemInput {
     """
     ID of the item to be removed
@@ -117,6 +122,7 @@ export const typeDefs = gql`
   union RemoveTagResult = Item | ItemNotFound
   union MeResult = User | UserNotFound
   union AddUserResult = Campaign | CampaignNotFound | UserNotFound
+  union EditUserResult = User | UserNotFound
 
   type Query {
     campaigns: [Campaign!]!
@@ -135,6 +141,7 @@ export const typeDefs = gql`
     addTag(itemId: ID!, tag: String!): AddTagResult!
     removeTag(itemId: ID!, tag: String!): RemoveTagResult!
 
+    editUser(input: EditUserInput!): EditUserResult!
     login(externalId: String!): User!
     joinCampaign(campaignId: String!): AddUserResult!
   }
