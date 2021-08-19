@@ -9,7 +9,6 @@ generator client {
 
 model Campaign {
   id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
   name      String
   platinum  Int      @default(0)
   gold      Int      @default(0)
@@ -18,27 +17,30 @@ model Campaign {
   copper    Int      @default(0)
   items     Item[]
   users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Item {
-  id          String    @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   description String?
   notes       String?
   tags        String[]
-  quantity    Int       @default(1)
-  updatedAt   DateTime?
-  createdAt   DateTime  @default(now())
-  campaign    Campaign  @relation(fields: [campaignId], references: [id])
+  quantity    Int      @default(1)
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
   campaignId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model User {
   id         String     @id @default(uuid())
   externalId String     @unique
+  username   String?
   lastLogin  DateTime   @default(now())
-  createdAt  DateTime   @default(now())
   imageUrl   String?
-  updatedAt  DateTime?
   campaigns  Campaign[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }
