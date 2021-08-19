@@ -21,7 +21,7 @@ export const typeDefs = gql`
     notes: String
     tags: [String!]!
     createdAt: Date!
-    updatedAt: Date
+    updatedAt: Date!
   }
 
   type Campaign {
@@ -34,6 +34,7 @@ export const typeDefs = gql`
     copper: Int!
     items: [Item!]!
     createdAt: Date!
+    updatedAt: Date!
     users: [User!]!
     itemCount: Int!
     userCount: Int!
@@ -42,9 +43,10 @@ export const typeDefs = gql`
   type User {
     id: ID!
     externalId: String!
+    username: String
     lastLogin: Date!
     createdAt: Date!
-    updatedAt: Date
+    updatedAt: Date!
     imageUrl: String
     campaigns: [Campaign!]!
     campaignCount: Int!

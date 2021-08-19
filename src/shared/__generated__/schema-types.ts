@@ -45,6 +45,7 @@ export type Campaign = {
   copper: Scalars['Int'];
   items: Array<Item>;
   createdAt: Scalars['Date'];
+  updatedAt: Scalars['Date'];
   users: Array<User>;
   itemCount: Scalars['Int'];
   userCount: Scalars['Int'];
@@ -86,7 +87,7 @@ export type Item = {
   notes?: Maybe<Scalars['String']>;
   tags: Array<Scalars['String']>;
   createdAt: Scalars['Date'];
-  updatedAt?: Maybe<Scalars['Date']>;
+  updatedAt: Scalars['Date'];
 };
 
 export type ItemNotFound = {
@@ -206,9 +207,10 @@ export type User = {
   __typename: 'User';
   id: Scalars['ID'];
   externalId: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
   lastLogin: Scalars['Date'];
   createdAt: Scalars['Date'];
-  updatedAt?: Maybe<Scalars['Date']>;
+  updatedAt: Scalars['Date'];
   imageUrl?: Maybe<Scalars['String']>;
   campaigns: Array<Campaign>;
   campaignCount: Scalars['Int'];
@@ -373,6 +375,7 @@ export type CampaignResolvers<ContextType = GQLContext, ParentType = ResolversPa
   copper?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   items?: Resolver<Array<ResolversTypes['Item']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   itemCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   userCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -417,7 +420,7 @@ export type ItemResolvers<ContextType = GQLContext, ParentType = ResolversParent
   notes?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -464,9 +467,10 @@ export type RemoveTagResultResolvers<ContextType = GQLContext, ParentType = Reso
 export type UserResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['User']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   externalId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lastLogin?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
   campaignCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
