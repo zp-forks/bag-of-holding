@@ -21,7 +21,7 @@ export const joinCampaign: MutationResolvers['joinCampaign'] = async (
     };
   } catch (error) {
     // error code for connected object not being found
-    if (error.code === 'P2025') {
+    if ((error as any)?.code === 'P2025') {
       return {
         __typename: 'UserNotFound',
         message: `User with ID ${userId} not found`,
